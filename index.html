@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=divice-width, initial=scale=1">
+  <meta name="viewport" content="width=device-width, initial=scale=1">
   <meta name="discription" content="Проект: создание соц. сети">
   <meta name="keywords" content="Проектная работа для Яндекс Практикум">
   <meta name="author" content="Гуляев Серёжа">
@@ -22,16 +22,34 @@
 
     <main class="main">
       <div class="edit-form">
-        <form>
-          <
+        <div class="edit-form__close"></div>
+        <form class="form">
+          <h1 class="form__title"></h1>
+          <input class="form__name-profile" type="text">
+          <input class="form__discroption-profile" type="text">
+          <button class="form__btn-save"></button>
         </form>
       </div>
+
+      <section class="profole">
+        <div class="profile__avatar"></div>
+        <div class="profile-info">
+          <h1 class="profole-info__name"></h1>
+          <div class="profile-info__btn"></div>
+          <p class="profile-info__discription"></p>
+        </div>
+        <div class="profile__add-btn"></div>
+      </section>
+
+      <section class="cards">
+      </section>
     </main>
 
     <footer class="footer">
       <p class="footer__copyright">&copy; 2022. Гуляев Серёжа</p>
     </footer>
   </div>
+  <script src="./pages/index.js"></script>
 </body>
 
 </html>
