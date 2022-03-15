@@ -1,0 +1,16 @@
+.profile-info__discription {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 17px;
+  padding: 0;
+  margin: 14px 0 0;
+}
+
+@media screen and (min-width: 425px) {
+  .profile-info__discription {
+    font-size: 18px;
+    line-height: 22px;
+    margin: 16px 0 0;
+  }
+}
