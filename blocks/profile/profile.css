@@ -6,11 +6,12 @@
   align-items: center;
 }
 
-@media screen and (min-width: 425px) {
+@media screen and (min-width: 750px) {
   .profile {
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 120px 1fr 170px;
     max-width: 880px;
-    padding-left: 27px;
+    padding: 0 27px;
   }
 }
 

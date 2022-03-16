@@ -6,28 +6,36 @@
   padding: 0;
   margin-top: 36px;
   transition: opacity .3s ease-in-out;
-  justify-self: end;   /* не работает */
 }
-
+/*
 .profile__add-btn::after {
   content: '';
+  height: 30px;
+  width: 30px;
   border: 1px solid white;
-  transform: rotate(90deg); /* не работает */
+  transform: rotate(45deg);
 }
 
 .profile__add-btn::before {
   content: '';
   border: 1px solid white;
-}
+  height: 30px;
+  width: 30px;
+} */
 
 .profile__add-btn:hover {
   opacity: .4;
 }
 
-@media screen and (min-width: 720px) {
+@media screen and (min-width: 425px) {
+  .profile__add-btn {
+    width: 100vh;
+    margin-left: 20px;
+  }
+}
+
+@media screen and (min-width: 750px) {
   .profile__add-btn {
     width: 150px;
-    margin: 0 0 0 20px;
-    justify-self: end;
   }
 }
