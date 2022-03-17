@@ -7,7 +7,7 @@
   margin: 0;
   color: #000;
 
-  text-overflow: ellipsis;
+  overflow: hidden;
   white-space: nowrap;
-  overflow: hidden;   /*не работает */
+  text-overflow: ellipsis;
 }

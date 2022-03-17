@@ -7,21 +7,23 @@
   margin-top: 36px;
   transition: opacity .3s ease-in-out;
 }
-/*
+
 .profile__add-btn::after {
   content: '';
-  height: 30px;
-  width: 30px;
+  display: block;
+  width: 22px;
   border: 1px solid white;
-  transform: rotate(45deg);
+  margin: -1px auto  0;
+  transform: rotate(90deg);
 }
 
 .profile__add-btn::before {
   content: '';
+  display: block;
+  width: 22px;
   border: 1px solid white;
-  height: 30px;
-  width: 30px;
-} */
+  margin: 0 auto;
+}
 
 .profile__add-btn:hover {
   opacity: .4;
@@ -29,13 +31,13 @@
 
 @media screen and (min-width: 425px) {
   .profile__add-btn {
-    width: 100vh;
-    margin-left: 20px;
+    width: 80vh;
   }
 }
 
 @media screen and (min-width: 750px) {
   .profile__add-btn {
     width: 150px;
+    margin-left: 20px;
   }
 }

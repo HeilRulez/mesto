@@ -1,0 +1,18 @@
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 80vh;
+  min-height: 322px;
+  background-color: white;
+  border-radius: 10px;
+  margin: 0 19px 0;
+}
+
+@media screen and (min-width: 750px) {
+  .edit-form {
+    width: 430px;
+    height: 330px;
+    margin: 0;
+  }
+}

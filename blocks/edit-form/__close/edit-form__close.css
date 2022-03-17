@@ -1,0 +1,29 @@
+.edit-form__close {
+  position: absolute;
+  top: -38px;
+  right: -38px;  /* порправить */
+}
+
+.edit-form__close::after {
+  content: '';
+  width: 30px;
+  display: block;
+  border: 1px solid white;
+  transform: rotate(45deg);
+  /* margin: 0 auto; */
+}
+
+.edit-form__close::before {
+  content: '';
+  width: 30px;
+  display: block;
+  border: 1px solid white;
+  transform: rotate(-45deg);
+  /* margin: 0 auto; */
+}
+
+@media screen and (max-width: 749px) {
+  .edit-form__close  {
+    right: 0; /* заменить */
+  }
+}
