@@ -1,7 +1,13 @@
 .edit-form__close {
   position: absolute;
-  top: -38px;
-  right: -38px;  /* порправить */
+  top: -40px;
+  right: -40px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 32px;
+  height: 32px;
+  padding: 0;
 }
 
 .edit-form__close::after {
@@ -10,7 +16,8 @@
   display: block;
   border: 1px solid white;
   transform: rotate(45deg);
-  /* margin: 0 auto; */
+  margin: -2px auto  0;
+  background-color: #fff;
 }
 
 .edit-form__close::before {
@@ -19,11 +26,12 @@
   display: block;
   border: 1px solid white;
   transform: rotate(-45deg);
-  /* margin: 0 auto; */
+  margin: -2px auto  0;
+  background-color: #fff;
 }
 
 @media screen and (max-width: 749px) {
   .edit-form__close  {
-    right: 0; /* заменить */
+    right: -4px; /* заменить */
   }
 }

@@ -5,13 +5,13 @@
   line-height: 22px;
   color: #000;
   padding: 0;
-  margin: 0 auto;
-  width: 100%;
+  margin: 25px auto 0;
 }
 
-@media screen and (min-width: 425px) {
+@media screen and (min-width: 560px) {
   .form__title {
     font-size: 24px;
     line-height: 29px;
+    margin: 34px 0 0 36px;
   }
 }

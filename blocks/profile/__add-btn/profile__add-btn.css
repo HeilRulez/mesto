@@ -14,6 +14,7 @@
   width: 22px;
   border: 1px solid white;
   margin: -1px auto  0;
+  background-color: #fff;
   transform: rotate(90deg);
 }
 
@@ -23,6 +24,7 @@
   width: 22px;
   border: 1px solid white;
   margin: 0 auto;
+  background-color: #fff;
 }
 
 .profile__add-btn:hover {
@@ -31,7 +33,7 @@
 
 @media screen and (min-width: 425px) {
   .profile__add-btn {
-    width: 80vh;
+    width: calc(60% - 38px);
   }
 }
 
