@@ -33,3 +33,5 @@
 @import url(../blocks/form/__name-profile/form__name-profile.css);
 @import url(../blocks/form/__discription-profile/form__discription-profile.css);
 @import url(../blocks/form/__btn-save/form__btn-save.css);
+
+@import url(../blocks/visible/visible.css);

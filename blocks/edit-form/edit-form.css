@@ -1,5 +1,5 @@
 .edit-form {
-  display: flex;
+  display: none;
   flex-direction: column;
   position: relative;
   width: 282px;
