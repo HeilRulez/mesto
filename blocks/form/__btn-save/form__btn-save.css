@@ -5,6 +5,12 @@
   background-color: #000;
   color: #fff;
   margin: 0 auto 22px;
+  cursor: pointer;
+  transition: opacity .3s ease-in-out;
+}
+
+.form__btn-save:hover {
+  opacity: .4;
 }
 
 @media screen and (min-width: 560px) {

@@ -8,6 +8,11 @@
   width: 32px;
   height: 32px;
   padding: 0;
+  transition: opacity .3s ease-in-out;
+}
+
+.edit-form__close:hover {
+  opacity: .4;
 }
 
 .edit-form__close::after {
