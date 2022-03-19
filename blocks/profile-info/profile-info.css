@@ -12,6 +12,7 @@
 
 @media screen and (min-width: 750px) {
   .profile-info {
+    padding: 0;
     text-align: left;
     padding-left: 30px;
   }

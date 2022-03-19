@@ -4,11 +4,10 @@
   background-size: contain;
   width: 103px;
   height: 33px;
-  /* margin-left: 27px; */
 }
 
 @media screen and (min-width: 425px) {
   .header__logo {
-    margin: 0;
+    width: 142px;
   }
 }
