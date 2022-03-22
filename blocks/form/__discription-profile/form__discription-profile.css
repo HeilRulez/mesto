@@ -1,0 +1,11 @@
+.form__discroption-profile {
+  border: none;
+  border-bottom: 1px solid;
+  margin-bottom: 45px;
+}
+
+@media screen and (min-width: 560px) {
+  .form__discroption-profile {
+    margin-bottom: 48px;
+  }
+}

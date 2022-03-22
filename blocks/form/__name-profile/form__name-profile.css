@@ -1,4 +1,11 @@
 .form__name-profile {
-  width: 100%;
-  margin: 0 auto;
+  border: none;
+  border-bottom: 1px solid;
+  margin: 75px 0 30px;
+}
+
+@media screen and (min-width: 560px) {
+  .form__name-profile {
+    margin: 54px 0 30px;
+  }
 }

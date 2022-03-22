@@ -5,7 +5,7 @@
   line-height: 17px;
   padding: 0;
   margin: 14px auto 0;
-  max-width: 282px;
+  max-width: 282px;     //!!!!!!!!!!!!!!!!!!!!!!!!
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
