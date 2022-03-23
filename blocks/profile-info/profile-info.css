@@ -1,18 +1,19 @@
 .profile-info {
+  display: grid;
+  grid-template-columns: min-content 24px;
+  align-items: baseline;
   text-align: center;
   padding-top: 26px;
 }
 
 @media screen and (min-width: 425px) {
   .profile-info {
-    max-width: 565px;
-    min-width: max-content;
   }
 }
 
 @media screen and (min-width: 750px) {
   .profile-info {
     text-align: left;
-    padding-left: 30px;
+    padding: 0 0 0 30px;
   }
 }

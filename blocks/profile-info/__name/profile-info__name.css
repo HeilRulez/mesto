@@ -8,20 +8,25 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  min-width: 282px;
+  max-width: 240px;
 }
 
 @media screen and (min-width: 425px) {
   .profile-info__name {
     font-size: 48px;
     line-height: 48px;
-    margin: 0;
+    max-width: 300px;
   }
 }
 
 @media screen and (min-width: 750px) {
   .profile-info__name {
-    max-width: calc(880px - 120px - 30px - 150px - 20px - 18px - 24px);
+    max-width: 360px;
+  }
+}
 
+@media screen and (min-width: 900px) {
+  .profile-info__name {
+    max-width: 460px;
   }
 }
