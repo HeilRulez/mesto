@@ -12,7 +12,7 @@
 }
 
 .edit-form__close:hover {
-  opacity: .4;
+  opacity: .6;
 }
 
 .edit-form__close::after {
@@ -33,10 +33,4 @@
   transform: rotate(-45deg);
   margin: -2px auto  0;
   background-color: #fff;
-}
-
-@media screen and (max-width: 749px) {
-  .edit-form__close  {
-    right: -4px; /* заменить */
-  }
 }
