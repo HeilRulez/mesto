@@ -13,13 +13,14 @@
 }
 
 .profile-info__btn:hover {
-  opacity: .4;
+  opacity: .6;
 }
 
 @media screen and (min-width: 425px) {
   .profile-info__btn {
     width: 24px;
     height: 24px;
+    /* align-self: center; */
     margin-left: 18px;
   }
 }
