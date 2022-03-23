@@ -10,6 +10,12 @@
   .profile-info {
     padding: 0;
     text-align: left;
-    padding: 0 0 0 30px;
+    /* padding: 0 0 0 30px;
+    Тут тесты Яндекса выдают такую дичь:
+            "Файл: blocks/profile-info/profile-info.css,
+              строка: 13. Свойство padding повторяется."
+    Придётся без него обойтись.
+    */
+    margin-left: 30px;
   }
 }
