@@ -10,7 +10,7 @@
 }
 
 .form__btn-save:hover {
-  opacity: .4;
+  opacity: .8;
 }
 
 @media screen and (min-width: 560px) {
