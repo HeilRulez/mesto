@@ -41,4 +41,12 @@
     height: 32px;
     right: -40px;
   }
+
+  .edit-form__close::after {
+    width: 30px;
+  }
+
+  .edit-form__close::before {
+    width: 30px;
+  }
 }
