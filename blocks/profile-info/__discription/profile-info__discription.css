@@ -22,7 +22,7 @@
 
 @media screen and (min-width: 750px) {
   .profile-info__discription {
-    margin: 12px 0 0;
+    margin: 8px 0 0;
     max-width: 360px;
   }
 }

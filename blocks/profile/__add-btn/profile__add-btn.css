@@ -12,7 +12,7 @@
 .profile__add-btn::after {
   content: '';
   display: block;
-  width: 22px;
+  width: 14px;
   border: 1px solid white;
   margin: -1px auto  0;
   background-color: #fff;
@@ -22,7 +22,7 @@
 .profile__add-btn::before {
   content: '';
   display: block;
-  width: 22px;
+  width: 14px;
   border: 1px solid white;
   margin: 0 auto;
   background-color: #fff;
@@ -42,5 +42,19 @@
   .profile__add-btn {
     margin: 0 0 0 20px;
     width: 150px;
+  }
+
+  .profile__add-btn::after {
+    width: 22px;
+  }
+
+  .profile__add-btn::before {
+    width: 22px;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .profile__add-btn {
+    margin: 0;
   }
 }
