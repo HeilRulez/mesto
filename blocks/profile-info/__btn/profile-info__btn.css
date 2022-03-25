@@ -6,10 +6,10 @@
   width: 18px;
   height: 18px;
   border: 1px solid white;
-  margin-left: 10px;
   padding: auto 0;
   cursor: pointer;
   transition: opacity .3s ease-in-out;
+  justify-self: center;
 }
 
 .profile-info__btn:hover {
@@ -20,6 +20,6 @@
   .profile-info__btn {
     width: 24px;
     height: 24px;
-    margin-left: 18px;
+    justify-self: end;
   }
 }

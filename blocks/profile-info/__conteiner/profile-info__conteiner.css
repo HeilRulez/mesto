@@ -1,6 +1,6 @@
 .profile-info__conteiner {
   display: grid;
-  grid-template-columns: min-content 24px;
+  grid-template-columns: min-content 34px;
   align-items: baseline;
 }
 
