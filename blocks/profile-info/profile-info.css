@@ -3,19 +3,12 @@
   grid-template-columns: min-content 24px;
   align-items: baseline;
   text-align: center;
-  padding: 26px 0 0 0;
+  padding: 26px 0 0 30px;
 }
 
 @media screen and (min-width: 750px) {
   .profile-info {
-    padding: 0;
     text-align: left;
-    /* padding: 0 0 0 30px;
-    Тут тесты Яндекса выдают такую дичь:
-            "Файл: blocks/profile-info/profile-info.css,
-              строка: 13. Свойство padding повторяется."
-    Придётся без него обойтись.
-    */
-    margin-left: 30px;
+    padding: 0 0 0 30px;
   }
 }

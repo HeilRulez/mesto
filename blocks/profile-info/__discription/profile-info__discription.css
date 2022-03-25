@@ -15,14 +15,14 @@
   .profile-info__discription {
     font-size: 18px;
     line-height: 22px;
-    margin: 16px auto 0;
+    margin: 12px auto 0;
     max-width: 300px;
   }
 }
 
 @media screen and (min-width: 750px) {
   .profile-info__discription {
-    margin: 16px 0 0;
+    margin: 12px 0 0;
     max-width: 360px;
   }
 }

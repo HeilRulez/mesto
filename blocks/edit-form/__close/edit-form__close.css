@@ -1,12 +1,12 @@
 .edit-form__close {
   position: absolute;
   top: -40px;
-  right: -40px;
+  right: -4px;
+  width: 24px;
+  height: 24px;
   cursor: pointer;
   border: none;
   background: none;
-  width: 32px;
-  height: 32px;
   padding: 0;
   transition: opacity .3s ease-in-out;
 }
@@ -17,7 +17,7 @@
 
 .edit-form__close::after {
   content: '';
-  width: 30px;
+  width: 22px;
   display: block;
   border: 1px solid white;
   transform: rotate(45deg);
@@ -27,10 +27,18 @@
 
 .edit-form__close::before {
   content: '';
-  width: 30px;
+  width: 22px;
   display: block;
   border: 1px solid white;
   transform: rotate(-45deg);
   margin: -2px auto  0;
   background-color: #fff;
+}
+
+@media screen and (min-width: 425px) {
+  .edit-form__close {
+    width: 32px;
+    height: 32px;
+    right: -40px;
+  }
 }
