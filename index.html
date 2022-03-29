@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="discription" content="Проект: создание соц. сети">
+  <meta name="keywords" content="Проектная работа для Яндекс Практикум">
+  <meta name="author" content="Гуляев Серёжа">
+
+  <link rel="stylesheet" href="./pages/index.css">
+  <link rel="icon" href="./images/icon.png">
+
+  <title>MESTO</title>
+</head>
+
+<body>
+  <div class="page">
+    <header class="header">
+      <div class="header__logo"></div>
+    </header>
+
+    <main>
+      <section class="profile">
+        <img class="profile__avatar" src="./images/avatar.jpg" alt="Фото профиля">
+        <div class="profile-info">
+          <div class="profile-info__conteiner">
+            <h1 class="profile-info__name">Жак-Ив Кусто</h1>
+            <button class="profile-info__btn" type="button"></button>
+          </div>
+          <p class="profile-info__discription">Исследователь океана</p>
+        </div>
+        <button class="profile__add-btn" type="button"></button>
+      </section>
+
+      <section class="cards">
+        <div class="card">
+          <img class="card__img" src="./images/content/kar.png" alt="Фото. Карачаево-Черкессия">
+          <div class="card__discription">
+            <h2 class="card__title">Карачаево-Черкессия</h2>
+            <button class="card__like" type="button"></button>
+          </div>
+        </div>
+        <div class="card">
+          <img class="card__img" src="./images/content/elb.png" alt="Фото. Гора Эльбрус">
+          <div class="card__discription">
+            <h2 class="card__title">Гора Эльбрус</h2>
+            <button class="card__like" type="button"></button>
+          </div>
+        </div>
+        <div class="card">
+          <img class="card__img" src="./images/content/dom.png" alt="Фото. Домбай">
+          <div class="card__discription">
+            <h2 class="card__title">Домбай</h2>
+            <button class="card__like" type="button"></button>
+          </div>
+        </div>
+        <div class="card">
+          <img class="card__img" src="./images/content/elb.png" alt="Фото. Гора Эльбрус">
+          <div class="card__discription">
+            <h2 class="card__title">Гора Эльбрус</h2>
+            <button class="card__like" type="button"></button>
+          </div>
+        </div>
+        <div class="card">
+          <img class="card__img" src="./images/content/dom.png" alt="Фото. Домбай">
+          <div class="card__discription">
+            <h2 class="card__title">Домбай</h2>
+            <button class="card__like" type="button"></button>
+          </div>
+        </div>
+        <div class="card">
+          <img class="card__img" src="./images/content/kar.png" alt="Фото. Карачаево-Черкессия">
+          <div class="card__discription">
+            <h2 class="card__title">Карачаево-Черкессия</h2>
+            <button class="card__like" type="button"></button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p class="footer__copyright">&copy; 2022. Гуляев Серёжа</p>
+    </footer>
+
+    <section class="form-container">
+      <div class="edit-form">
+        <button class="edit-form__close" type="button"></button>
+        <h2 class="edit-form__title">Редактировать профиль</h2>
+        <form class="form" name="edit-form">
+          <input class="form__name-profile" type="text" name="name-profile" required>
+          <input class="form__discroption-profile" type="text" name="discroption-profile">
+          <button class="form__btn-save" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </section>
+
+  </div>
+  <script src="./scripts/index.js"></script>
+</body>
+
+</html>
