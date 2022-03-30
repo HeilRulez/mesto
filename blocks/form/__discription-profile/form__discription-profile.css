@@ -11,6 +11,10 @@
   padding-bottom: 8px;
 }
 
+.form__discroption-profile::placeholder {
+  color: #C4C4C4;
+}
+
 @media screen and (min-width: 560px) {
   .form__discroption-profile {
     margin-bottom: 48px;

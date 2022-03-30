@@ -11,6 +11,10 @@
   padding-bottom: 8px;
 }
 
+.form__name-profile::placeholder {
+  color: #C4C4C4;
+}
+
 @media screen and (min-width: 560px) {
   .form__name-profile {
     margin: 48px 0 30px;

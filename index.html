@@ -34,48 +34,6 @@
       </section>
 
       <section class="cards">
-        <div class="card">
-          <img class="card__img" src="./images/content/kar.png" alt="Фото. Карачаево-Черкессия">
-          <div class="card__discription">
-            <h2 class="card__title">Карачаево-Черкессия</h2>
-            <button class="card__like" type="button"></button>
-          </div>
-        </div>
-        <div class="card">
-          <img class="card__img" src="./images/content/elb.png" alt="Фото. Гора Эльбрус">
-          <div class="card__discription">
-            <h2 class="card__title">Гора Эльбрус</h2>
-            <button class="card__like" type="button"></button>
-          </div>
-        </div>
-        <div class="card">
-          <img class="card__img" src="./images/content/dom.png" alt="Фото. Домбай">
-          <div class="card__discription">
-            <h2 class="card__title">Домбай</h2>
-            <button class="card__like" type="button"></button>
-          </div>
-        </div>
-        <div class="card">
-          <img class="card__img" src="./images/content/elb.png" alt="Фото. Гора Эльбрус">
-          <div class="card__discription">
-            <h2 class="card__title">Гора Эльбрус</h2>
-            <button class="card__like" type="button"></button>
-          </div>
-        </div>
-        <div class="card">
-          <img class="card__img" src="./images/content/dom.png" alt="Фото. Домбай">
-          <div class="card__discription">
-            <h2 class="card__title">Домбай</h2>
-            <button class="card__like" type="button"></button>
-          </div>
-        </div>
-        <div class="card">
-          <img class="card__img" src="./images/content/kar.png" alt="Фото. Карачаево-Черкессия">
-          <div class="card__discription">
-            <h2 class="card__title">Карачаево-Черкессия</h2>
-            <button class="card__like" type="button"></button>
-          </div>
-        </div>
       </section>
     </main>
 
@@ -83,17 +41,41 @@
       <p class="footer__copyright">&copy; 2022. Гуляев Серёжа</p>
     </footer>
 
-    <section class="form-container">
-      <div class="edit-form">
-        <button class="edit-form__close" type="button"></button>
+    <section class="form-container prof">
+      <div class="edit-form prof">
+        <button class="edit-form__close prof" type="button"></button>
         <h2 class="edit-form__title">Редактировать профиль</h2>
-        <form class="form" name="edit-form">
-          <input class="form__name-profile" type="text" name="name-profile" required>
-          <input class="form__discroption-profile" type="text" name="discroption-profile">
-          <button class="form__btn-save" type="submit">Сохранить</button>
+        <form class="form prof" name="edit-form">
+          <input class="form__name-profile prof" type="text" name="name-profile" required>
+          <input class="form__discroption-profile prof" type="text" name="discroption-profile">
+          <button class="form__btn-save prof" type="submit">Сохранить</button>
         </form>
       </div>
     </section>
+
+    <section class="form-container addCard">
+      <div class="edit-form addCard">
+        <button class="edit-form__close addCard" type="button"></button>
+        <h2 class="edit-form__title">Новое место</h2>
+        <form class="form addCard" name="add-form">
+          <input class="form__name-profile addCard" type="text" name="name-card" placeholder="Название">
+          <input class="form__discroption-profile addCard" type="text" name="data-card" placeholder="Ссылка на картинку"
+            required>
+          <button class="form__btn-save addCard" type="submit">Создать</button>
+        </form>
+      </div>
+    </section>
+
+    <template class="sample-card">
+      <div class="card">
+        <button class="card__del" type="button"></button>
+        <img class="card__img" src="" alt="">
+        <div class="card__discription">
+          <h2 class="card__title"></h2>
+          <button class="card__like" type="button"></button>
+        </div>
+      </div>
+    </template>
 
   </div>
   <script src="./scripts/index.js"></script>
