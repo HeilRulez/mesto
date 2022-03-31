@@ -16,72 +16,83 @@ const formContAdd = document.querySelector('.form-container.addCard'),
   cards = document.querySelector('.cards'),
   sampleCard = document.querySelector('.sample-card').content;
 
-function closeEditProfile() {
-  formContProf.classList.remove('visible');
+const formContScaleImg = document.querySelector('.form-container.scaleImg'),
+  scaleImgForm = document.querySelector('.scaleImg-form'),
+  editFormCloseScaleImg = document.querySelector('.edit-form__close.scaleImg'),
+  scaleImgFormTitle = document.querySelector('.scaleImg-form__title');
+
+profileInfoBtn.addEventListener('click', openEditProfile, false); //данные профиля
+formProf.addEventListener('submit', saveData, false); // отправка данных профиля
+profileAddBtn.addEventListener('click', openAddCard, false);  // выбор контента
+formAdd.addEventListener('submit', btnAddCard, false);  // добавить контент на страницу
+editFormCloseProf.addEventListener('click', closeForm, false);
+editFormCloseAdd.addEventListener('click', closeForm, false);
+editFormCloseScaleImg.addEventListener('click', closeForm, false);
+
+
+// Закрытие любого модального окна
+function closeForm(evt) {
+  evt.target.closest('.form-container').classList.remove('visible');
 }
 
+// Форма данных профиля
 function openEditProfile() {
   formNameProfile.value = profileInfoName.textContent;
   formDiscroptionProfile.value = profileInfoDiscription.textContent;
   formContProf.classList.add('visible');
 }
 
+// Отправка данных профиля из формы на страницу
 function saveData(evt) {
   evt.preventDefault();
   profileInfoName.textContent = formNameProfile.value;
   profileInfoDiscription.textContent = formDiscroptionProfile.value;
-  closeEditProfile()
+  closeForm(evt)
 }
 
-profileInfoBtn.addEventListener('click', openEditProfile, false);
-editFormCloseProf.addEventListener('click', closeEditProfile, false);
-formProf.addEventListener('submit', saveData, false);
-
+// Форма добавления контента
 function openAddCard() {
   formContAdd.classList.add('visible');
   formNameCard.value = '';
   formData.value = '';
 }
 
-function closeAddCard() {
-  formContAdd.classList.remove('visible');
-}
-
+// Отправка контента на страницу
 function btnAddCard(evt) {
   evt.preventDefault();
   let name = formNameCard.value,
       data = formData.value;
   addCard(name, data);
   cardsData.push({name: name, link: data});
-  closeAddCard();
+  closeForm(evt);
 }
 
+// Создание карточки контента из шаблона
 function addCard(name='', data) {
   cardItem = sampleCard.querySelector('.card').cloneNode(true);
   cardItem.querySelector('.card__title').textContent = name;
   cardItem.querySelector('.card__img').src = data;
-  cardItem.querySelector('.card__img').alt = `Фото. ${name}`;
+  cardItem.querySelector('.card__img').alt = name;
   cardItem.querySelector('.card__del').addEventListener('click', delCard, false);
-  cards.append(cardItem);
+  cardItem.querySelector('.card__like').addEventListener('click', likeCard, false);
+  cardItem.querySelector('.card__img').addEventListener('click', scaleImg, false);
+  cards.prepend(cardItem);
 }
 
 function delCard(evt) {
-  let itemCard = null;
-  cardsData.forEach(el => {
-    // console.log(evt.target.closest('.card').querySelector('.card__img').src);
-    if (el.link === evt.target.closest('.card').querySelector('.card__img').src) {
-      console.log(el.indexOf());  // ???????
-      itemCard = el.indexOf();
-    }
-  });
   evt.target.closest('.card').remove();
-
-  cardsData.splice(itemCard, 1);
 }
 
-profileAddBtn.addEventListener('click', openAddCard, false);
-editFormCloseAdd.addEventListener('click', closeAddCard, false);
-formAdd.addEventListener('submit', btnAddCard, false);
+function likeCard(evt) {
+  evt.target.classList.toggle("card__like_active");
+}
+
+// Увеличение картинки
+function scaleImg(evt) {
+  formContScaleImg.classList.add('visible');
+  scaleImgForm.style.backgroundImage = `url(${evt.target.src})`;
+  scaleImgFormTitle.textContent = evt.target.alt;
+}
 
 
 const cardsData = [
@@ -111,4 +122,5 @@ const cardsData = [
   }
 ];
 
+// Отрисовка сохранённых карточек
 cardsData.forEach((item) => addCard(item.name, item.link));

@@ -8,8 +8,13 @@
   margin: auto 0;
   cursor: pointer;
   transition: opacity .3s ease-in-out;
+  transition: transform .5s;
 }
 
 .card__like:hover {
   opacity: .5;
+}
+
+.card__like:active {
+  transform: scale(1.3);
 }

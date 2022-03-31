@@ -1,0 +1,20 @@
+.scaleImg-form {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-width: 230px;
+  min-height: 280px;
+  background-color: white;
+  border-radius: 10px;
+  margin: 0 19px 0;
+  padding: 0 26px 0;
+}
+
+@media screen and (min-width: 560px) {
+  .edit-form {
+    padding: 0 38px 0;
+    min-width: 355px;
+    height: 330px;
+    margin: 0;
+  }
+}
