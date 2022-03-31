@@ -1,70 +1,51 @@
-const formContProf = document.querySelector('.form-container.prof'),
+const overlayForProfile = document.querySelector('.overlay_for_profile'),
   profileInfoBtn = document.querySelector('.profile-info__btn'),
-  editFormCloseProf = document.querySelector('.edit-form__close.prof'),
-  formProf = document.querySelector('.form.prof'),
-  formNameProfile = document.querySelector('.form__name-profile.prof'),
-  formDiscroptionProfile = document.querySelector('.form__discroption-profile.prof'),
+  modalFormCloseForProfile = document.querySelector('.modal-form__close_for_profile'),
+  formForProfile = document.querySelector('.form_for_profile'),
+  formNameForProfile = document.querySelector('.form__name_for_profile'),
+  formDataForProfile = document.querySelector('.form__data_for_profile'),
   profileInfoName = document.querySelector('.profile-info__name'),
   profileInfoDiscription = document.querySelector('.profile-info__discription');
 
-const formContAdd = document.querySelector('.form-container.addCard'),
+const overlayForAddCard = document.querySelector('.overlay_for_addCard'),
   profileAddBtn = document.querySelector('.profile__add-btn'),
-  editFormCloseAdd = document.querySelector('.edit-form__close.addCard'),
-  formAdd = document.querySelector('.form.addCard'),
-  formNameCard = document.querySelector('.form__name-profile.addCard'),
-  formData = document.querySelector('.form__discroption-profile.addCard'),
+  modalFormCloseForAddCard = document.querySelector('.modal-form__close_for_addCard'),
+  formForAddCard = document.querySelector('.form_for_addCard'),
+  formNameForAddCard = document.querySelector('.form__name_for_addCard'),
+  formDataForAddCard = document.querySelector('.form__data_for_addCard'),
   cards = document.querySelector('.cards'),
   sampleCard = document.querySelector('.sample-card').content;
 
-const formContScaleImg = document.querySelector('.form-container.scaleImg'),
-  scaleImgForm = document.querySelector('.scaleImg-form'),
-  editFormCloseScaleImg = document.querySelector('.edit-form__close.scaleImg'),
-  scaleImgFormTitle = document.querySelector('.scaleImg-form__title');
-
-profileInfoBtn.addEventListener('click', openEditProfile, false); //данные профиля
-formProf.addEventListener('submit', saveData, false); // отправка данных профиля
-profileAddBtn.addEventListener('click', openAddCard, false);  // выбор контента
-formAdd.addEventListener('submit', btnAddCard, false);  // добавить контент на страницу
-editFormCloseProf.addEventListener('click', closeForm, false);
-editFormCloseAdd.addEventListener('click', closeForm, false);
-editFormCloseScaleImg.addEventListener('click', closeForm, false);
-
+const overlayForView = document.querySelector('.overlay_for_view'),
+  modalFormViewImg = document.querySelector('.modal-form__view-img'),
+  modalFormCloseForView = document.querySelector('.modal-form__close_for_view'),
+  modalFormTitleForView = document.querySelector('.modal-form__title_for_view');
 
 // Закрытие любого модального окна
 function closeForm(evt) {
-  evt.target.closest('.form-container').classList.remove('visible');
+  evt.target.closest('.overlay').classList.remove('visible');
 }
 
 // Форма данных профиля
 function openEditProfile() {
-  formNameProfile.value = profileInfoName.textContent;
-  formDiscroptionProfile.value = profileInfoDiscription.textContent;
-  formContProf.classList.add('visible');
+  formNameForProfile.value = profileInfoName.textContent;
+  formDataForProfile.value = profileInfoDiscription.textContent;
+  overlayForProfile.classList.add('visible');
 }
 
 // Отправка данных профиля из формы на страницу
 function saveData(evt) {
   evt.preventDefault();
-  profileInfoName.textContent = formNameProfile.value;
-  profileInfoDiscription.textContent = formDiscroptionProfile.value;
+  profileInfoName.textContent = formNameForProfile.value;
+  profileInfoDiscription.textContent = formDataForProfile.value;
   closeForm(evt)
 }
 
 // Форма добавления контента
 function openAddCard() {
-  formContAdd.classList.add('visible');
-  formNameCard.value = '';
-  formData.value = '';
-}
-
-// Отправка контента на страницу
-function btnAddCard(evt) {
-  evt.preventDefault();
-  let name = formNameCard.value,
-      data = formData.value;
-  addCard(name, data);
-  cardsData.push({name: name, link: data});
-  closeForm(evt);
+  overlayForAddCard.classList.add('visible');
+  formNameForAddCard.value = '';
+  formDataForAddCard.value = '';
 }
 
 // Создание карточки контента из шаблона
@@ -79,6 +60,16 @@ function addCard(name='', data) {
   cards.prepend(cardItem);
 }
 
+// Отправка контента на страницу
+function btnAddCard(evt) {
+  evt.preventDefault();
+  let name = formNameForAddCard.value,
+      data = formDataForAddCard.value;
+  addCard(name, data);
+  cardsData.push({name: name, link: data});
+  closeForm(evt);
+}
+
 function delCard(evt) {
   evt.target.closest('.card').remove();
 }
@@ -89,11 +80,19 @@ function likeCard(evt) {
 
 // Увеличение картинки
 function scaleImg(evt) {
-  formContScaleImg.classList.add('visible');
-  scaleImgForm.style.backgroundImage = `url(${evt.target.src})`;
-  scaleImgFormTitle.textContent = evt.target.alt;
+  overlayForView.classList.add('visible');
+  modalFormViewImg.src = evt.target.src;
+  modalFormViewImg.alt = evt.target.alt;
+  modalFormTitleForView.textContent = evt.target.alt;
 }
 
+profileInfoBtn.addEventListener('click', openEditProfile, false); //данные профиля
+formForProfile.addEventListener('submit', saveData, false); // отправка данных профиля
+profileAddBtn.addEventListener('click', openAddCard, false);  // выбор контента
+formForAddCard.addEventListener('submit', btnAddCard, false);  // добавить контент на страницу
+modalFormCloseForProfile.addEventListener('click', closeForm, false);
+modalFormCloseForAddCard.addEventListener('click', closeForm, false);
+modalFormCloseForView.addEventListener('click', closeForm, false);
 
 const cardsData = [
   {

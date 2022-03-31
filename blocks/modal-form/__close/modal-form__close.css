@@ -1,4 +1,4 @@
-.edit-form__close {
+.modal-form__close {
   position: absolute;
   top: -40px;
   right: -4px;
@@ -11,11 +11,11 @@
   transition: opacity .3s ease-in-out;
 }
 
-.edit-form__close:hover {
+.modal-form__close:hover {
   opacity: .6;
 }
 
-.edit-form__close::after {
+.modal-form__close::after {
   content: '';
   width: 22px;
   display: block;
@@ -25,7 +25,7 @@
   background-color: #fff;
 }
 
-.edit-form__close::before {
+.modal-form__close::before {
   content: '';
   width: 22px;
   display: block;
@@ -36,17 +36,17 @@
 }
 
 @media screen and (min-width: 425px) {
-  .edit-form__close {
+  .modal-form__close {
     width: 40px;
     height: 40px;
     right: -46px;
   }
 
-  .edit-form__close::after {
+  .modal-form__close::after {
     width: 36px;
   }
 
-  .edit-form__close::before {
+  .modal-form__close::before {
     width: 36px;
   }
 }

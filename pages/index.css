@@ -28,17 +28,20 @@
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 
-@import url(../blocks/form-container/form-container.css);
-@import url(../blocks/edit-form/__title/edit-form__title.css);
-@import url(../blocks/edit-form/edit-form.css);
-@import url(../blocks/edit-form/__close/edit-form__close.css);
+@import url(../blocks/overlay/overlay.css);
+@import url(../blocks/overlay/_for/overlay_for_view.css);
+
+@import url(../blocks/modal-form/modal-form.css);
+@import url(../blocks/modal-form/_for/modal-form_for_view.css);
+@import url(../blocks/modal-form/__title/modal-form__title.css);
+@import url(../blocks/modal-form/__title/_for/modal-form__title_for_view.css);
+@import url(../blocks/modal-form/__view-img/modal-form__view-img.css);
+@import url(../blocks/modal-form/__close/modal-form__close.css);
 
 @import url(../blocks/form/form.css);
-@import url(../blocks/form/__name-profile/form__name-profile.css);
-@import url(../blocks/form/__discription-profile/form__discription-profile.css);
-@import url(../blocks/form/__btn-save/form__btn-save.css);
+@import url(../blocks/form/__name/form__name.css);
+@import url(../blocks/form/__data/form__data.css);
+@import url(../blocks/form/__btn-submit/form__btn-submit.css);
 
-@import url(../blocks/scaleImg-form/scaleImg-form.css);
-@import url(../blocks/scaleImg-form/__title/scaleImg-form__title.css);
 
 @import url(../blocks/visible/visible.css);

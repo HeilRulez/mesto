@@ -41,36 +41,39 @@
       <p class="footer__copyright">&copy; 2022. Гуляев Серёжа</p>
     </footer>
 
-    <section class="form-container prof">
-      <div class="edit-form prof">
-        <button class="edit-form__close prof" type="button"></button>
-        <h2 class="edit-form__title">Редактировать профиль</h2>
-        <form class="form prof" name="edit-form">
-          <input class="form__name-profile prof" type="text" name="name-profile" required>
-          <input class="form__discroption-profile prof" type="text" name="discroption-profile">
-          <button class="form__btn-save prof" type="submit">Сохранить</button>
+    <section class="overlay overlay_for_profile">
+      <div class="modal-form prof">
+        <button class="modal-form__close modal-form__close_for_profile" type="button"></button>
+        <h2 class="modal-form__title">Редактировать профиль</h2>
+        <form class="form form_for_profile" name="edit-form">
+          <input class="form__name form__name_for_profile" type="text" name="name-profile" required>
+          <input class="form__data form__data_for_profile" type="text" name="discroption-profile">
+          <button class="form__btn-submit" type="submit">Сохранить</button>
         </form>
       </div>
     </section>
 
-    <section class="form-container addCard">
-      <div class="edit-form addCard">
-        <button class="edit-form__close addCard" type="button"></button>
-        <h2 class="edit-form__title">Новое место</h2>
-        <form class="form addCard" name="add-form">
-          <input class="form__name-profile addCard" type="text" name="name-card" placeholder="Название">
-          <input class="form__discroption-profile addCard" type="text" name="data-card" placeholder="Ссылка на картинку"
+    <section class="overlay overlay_for_addCard">
+      <div class="modal-form modal-form_for_addCard">
+        <button class="modal-form__close modal-form__close_for_addCard" type="button"></button>
+        <h2 class="modal-form__title">Новое место</h2>
+        <form class="form form_for_addCard" name="add-form">
+          <input class="form__name form__name_for_addCard" type="text" name="name-card" placeholder="Название">
+          <input class="form__data form__data_for_addCard" type="text" name="data-card" placeholder="Ссылка на картинку"
             required>
-          <button class="form__btn-save addCard" type="submit">Создать</button>
+          <button class="form__btn-submit" type="submit">Создать</button>
         </form>
       </div>
     </section>
 
-    <section class="form-container scaleImg">
-      <div class="scaleImg-form">
-        <button class="edit-form__close scaleImg" type="button"></button>
+    <section class="overlay overlay_for_view">
+      <div class="modal-form modal-form_for_view">
+        <div>
+          <button class="modal-form__close modal-form__close_for_view" type="button"></button>
+          <img class="modal-form__view-img" src="" alt="">
+        </div>
+        <h2 class="modal-form__title modal-form__title_for_view"></h2>
       </div>
-      <h2 class="scaleImg-form__title"></h2>
     </section>
 
     <template class="sample-card">

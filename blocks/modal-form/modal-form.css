@@ -1,4 +1,4 @@
-.edit-form {
+.modal-form {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -11,7 +11,7 @@
 }
 
 @media screen and (min-width: 560px) {
-  .edit-form {
+  .modal-form {
     padding: 0 38px 0;
     min-width: 355px;
     height: 330px;

@@ -1,7 +1,7 @@
-.form__name-profile {
+.form__data {
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, .2);
-  margin: 74px 0 30px;
+  margin-bottom: 45px;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
@@ -11,12 +11,12 @@
   padding-bottom: 8px;
 }
 
-.form__name-profile::placeholder {
+.form__data::placeholder {
   color: #C4C4C4;
 }
 
 @media screen and (min-width: 560px) {
-  .form__name-profile {
-    margin: 48px 0 30px;
+  .form__data {
+    margin-bottom: 48px;
   }
 }
