@@ -23,14 +23,16 @@ const overlayForView = document.querySelector('.overlay_for_view'),
 
 // Закрытие любого модального окна
 function closeForm(evt) {
-  evt.target.closest('.overlay').classList.remove('visible');
+  evt.target.closest('.overlay').classList.remove('overlay_visible_on');
+  // я не знаю почему нет плавного закрытия. Во всём интернете, на всех форумах,
+  // удаление модиффткатора делает плавное закрытие - у меня на делает.
 }
 
 // Форма данных профиля
-function openEditProfile() {
+function openEditProfile(evt) {
   formNameForProfile.value = profileInfoName.textContent;
   formDataForProfile.value = profileInfoDiscription.textContent;
-  overlayForProfile.classList.add('visible');
+  overlayForProfile.classList.add('overlay_visible_on');
 }
 
 // Отправка данных профиля из формы на страницу
@@ -43,7 +45,7 @@ function saveData(evt) {
 
 // Форма добавления контента
 function openAddCard() {
-  overlayForAddCard.classList.add('visible');
+  overlayForAddCard.classList.add('overlay_visible_on');
   formNameForAddCard.value = '';
   formDataForAddCard.value = '';
 }
@@ -80,7 +82,7 @@ function likeCard(evt) {
 
 // Увеличение картинки
 function scaleImg(evt) {
-  overlayForView.classList.add('visible');
+  overlayForView.classList.add('overlay_visible_on');
   modalFormViewImg.src = evt.target.src;
   modalFormViewImg.alt = evt.target.alt;
   modalFormTitleForView.textContent = evt.target.alt;

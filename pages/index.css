@@ -30,6 +30,7 @@
 
 @import url(../blocks/overlay/overlay.css);
 @import url(../blocks/overlay/_for/overlay_for_view.css);
+@import url(../blocks/overlay/_visible/overlay_visible_on.css);
 
 @import url(../blocks/modal-form/modal-form.css);
 @import url(../blocks/modal-form/_for/modal-form_for_view.css);
@@ -42,6 +43,3 @@
 @import url(../blocks/form/__name/form__name.css);
 @import url(../blocks/form/__data/form__data.css);
 @import url(../blocks/form/__btn-submit/form__btn-submit.css);
-
-
-@import url(../blocks/visible/visible.css);

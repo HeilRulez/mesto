@@ -1,0 +1,238 @@
+[33mcommit be314a077e7f299c84064f1b65fe2aedc75ed84a[m[33m ([m[1;36mHEAD -> [m[1;32mfeat/formAddCard[m[33m, [m[1;31morigin/feat/formAddCard[m[33m)[m
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Fri Apr 1 12:42:46 2022 +0600
+
+    сделать opacyti
+
+[33mcommit 4a2b9143bcc5894c9fa5956c167a37e264719a33[m
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Fri Apr 1 05:53:32 2022 +0600
+
+    сделать плавное открытие/закрытие модалок
+
+[33mcommit 30af5ecbe112208c3f4c43d8fe0cb46c5b4a0f2e[m
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Thu Mar 31 18:07:45 2022 +0600
+
+    доделать открытие картинок
+
+[33mcommit 5411a1b15723f04782a73415943afee261f6c4a2[m
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Wed Mar 30 06:11:16 2022 +0600
+
+    Нужно доделать удаление из массива, удаляемой карточки
+
+[33mcommit eade2d43d3d1d24887c1ca4490230d3e640a312f[m
+Merge: d437f81 bd0bb43
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Tue Mar 29 22:52:59 2022 +0600
+
+    Merge branch 'main' into develop
+
+[33mcommit bd0bb438f3c86bb6c75110181182598567ebbc1c[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Tue Mar 29 22:50:03 2022 +0600
+
+    End_4_PR
+
+[33mcommit d437f8108c9881affe876356fc4af4e8580fb74e[m[33m ([m[1;31morigin/develop[m[33m)[m
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Sat Mar 26 03:39:40 2022 +0600
+
+    очередной коммит последних правок
+
+[33mcommit 564f21a709b355a32bc50e9df8c65ab1353d4c3c[m
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Sat Mar 26 03:26:08 2022 +0600
+
+    последний рабочий вариант
+
+[33mcommit 8474768c0d036e638873c9a27b032e4190eb73de[m
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Sat Mar 26 03:08:01 2022 +0600
+
+    последняя попытка
+
+[33mcommit 59887cee382476b70def57b4fa5ee28a8e1fb9e8[m
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Fri Mar 25 11:25:38 2022 +0600
+
+    фикс кнопки close
+
+[33mcommit b5b770509badbbda05817cf27f38325f1cf4d07b[m
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Fri Mar 25 11:19:13 2022 +0600
+
+    пофиксено
+
+[33mcommit a8f125f63439309a65a1cde2dfbdf13684259eb6[m
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Fri Mar 25 11:01:12 2022 +0600
+
+    3
+
+[33mcommit a9853d6e78eed0fa0cb9505f99696544d93b3e1d[m
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Thu Mar 24 04:53:39 2022 +0600
+
+    бесконечные правки
+
+[33mcommit c4195cf8afb010490c49440a02f812ee311e1430[m
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Thu Mar 24 04:40:57 2022 +0600
+
+    1
+
+[33mcommit b4217bc4d0aae770cd36b75bb39093889387da8e[m
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Thu Mar 24 04:28:24 2022 +0600
+
+    ебаныё гит хаб страница принял не все изменения
+
+[33mcommit a9c18ef835ce4ce15addd09be2aefc884735c139[m
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Thu Mar 24 04:19:59 2022 +0600
+
+    правки в форме
+
+[33mcommit 856ed86e48ac2258eb2e64d1c8240c2dc0eb9015[m
+Merge: 07162b0 f0973af
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Thu Mar 24 04:05:46 2022 +0600
+
+    первые правки
+
+[33mcommit f0973af45ebfeca8059ece2377bb72e9704c50d1[m
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Thu Mar 24 04:01:21 2022 +0600
+
+    худо бедно но работает
+
+[33mcommit d5c7a138d548f62508357e245377e5cf294acc93[m
+Merge: 32889fc 79d9e51
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Thu Mar 24 03:10:31 2022 +0600
+
+    ебаная кнопка эдит, всё ешё в пизде
+
+[33mcommit 32889fc9cff998ae5934388dcdb010984a668173[m
+Merge: 92edab5 2b5fe66
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Thu Mar 24 02:58:27 2022 +0600
+
+    html и css придумал дьявол
+
+[33mcommit 2b5fe66c097b5de83fb7f534a2c8f5a6a858ebb8[m
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Thu Mar 24 02:52:34 2022 +0600
+
+    ненавижу ебаную вёрстку
+
+[33mcommit 79d9e51a6228963ba882030982d9ea7567782182[m
+Merge: c6fbab6 269ff91
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Wed Mar 23 18:04:19 2022 +0600
+
+    какая то хоёвая смержа из fixet_1
+
+[33mcommit 269ff91da249fa6822fb47a98297f6e3a225a1e8[m
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Wed Mar 23 17:56:29 2022 +0600
+
+    коммит из дома
+
+[33mcommit 31917e85a4062bd86893f06039b7ec037a49796d[m
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Wed Mar 23 02:59:36 2022 +0600
+
+    первый коммит
+
+[33mcommit 07162b08c33f20649edb96dd04638648b1d5e0cd[m
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Sun Mar 20 03:27:22 2022 +0600
+
+    правки
+
+[33mcommit 92edab5ada1e1abec1d647ed073d0dae83a935e8[m
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Sun Mar 20 03:21:46 2022 +0600
+
+    ещё правки
+
+[33mcommit c6fbab631a16afe2d274ad70063c0bb6f1a1a617[m
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Sun Mar 20 01:28:42 2022 +0600
+
+    подправлены некоторые косяки и заполнен readme
+
+[33mcommit 6d7747af808dee50d896fcfde24400434b6b2dee[m
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Sat Mar 19 23:03:11 2022 +0600
+
+    коммит перед первым ревью
+
+[33mcommit 732794e223cf475be2a95084c71c7fa2b4d4c514[m
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Sat Mar 19 17:48:42 2022 +0600
+
+    сделать форму
+
+[33mcommit 6083b4e6c07bf1c73cfcd51b86c62cb16c3fb87c[m
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Fri Mar 18 19:05:56 2022 +0600
+
+    не отключается скролл событие
+
+[33mcommit aa4e26b35b545b5cb9c4e9a1f358a1c566399882[m
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Fri Mar 18 02:39:34 2022 +0600
+
+    ебала
+
+[33mcommit 2f329174e2cd807f79be5221bedd100d5a156577[m
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Thu Mar 17 21:00:02 2022 +0600
+
+    доделать форму
+
+[33mcommit 92c08197ffac02e1515eab637664c12a1a4c2e5a[m[33m ([m[1;31morigin/dev_index.html[m[33m, [m[1;32mdev_index.html[m[33m)[m
+Author: HeilRulez <Rulez.Heil@gmail.com>
+Date:   Wed Mar 16 20:48:25 2022 +0600
+
+    доделать карточки и сделать попап
+
+[33mcommit 435915af7f9669015c13fddc21d2c338a8bd54f7[m
+Author: HeilRulez <Rulez.Heil@gmail.com>
+Date:   Wed Mar 16 12:55:30 2022 +0600
+
+    grid готов. сделать карточки
+
+[33mcommit 7a4124be299a2c3e35ffb29eb8b3d1029217ffeb[m
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Wed Mar 16 05:42:03 2022 +0600
+
+    начал делать grid
+
+[33mcommit 46a0193c7764e493c3d8515d0ffa2bb6fba6b51a[m
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Mon Mar 14 02:29:20 2022 +0600
+
+    Добавление стилей для профиля
+
+[33mcommit 74458a098a1cb85e8f2d9e13ed7163ddd1166260[m
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Sat Mar 12 04:39:35 2022 +0600
+
+    Начал пилить стили
+
+[33mcommit 661aee07ce8a81fe847ee25df14ae2c055d4f5a8[m
+Author: HeilRulez <rulez.heil@gmail.com>
+Date:   Sat Mar 12 00:19:58 2022 +0600
+
+    Создание основной разметки
+
+[33mcommit 322c76e3497d1613a15da2f08b9c081a69cf42f3[m[33m ([m[1;32mmain[m[33m)[m
+Author: HeilRulez <81564927+HeilRulez@users.noreply.github.com>
+Date:   Thu Mar 10 23:49:02 2022 +0600
+
+    Initial commit
