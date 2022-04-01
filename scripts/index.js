@@ -24,8 +24,6 @@ const overlayForView = document.querySelector('.overlay_for_view'),
 // Закрытие любого модального окна
 function closeForm(evt) {
   evt.target.closest('.overlay').classList.remove('overlay_visible_on');
-  // я не знаю почему нет плавного закрытия. Во всём интернете, на всех форумах,
-  // удаление модиффткатора делает плавное закрытие - у меня на делает.
 }
 
 // Форма данных профиля
