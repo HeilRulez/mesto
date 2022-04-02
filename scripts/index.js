@@ -107,6 +107,7 @@ formForProfile.addEventListener('submit', saveData, false); // отправка 
 profileAddBtn.addEventListener('click', openAddCard, false); // выбор контента
 formForAddCard.addEventListener('submit', btnAddCard, false); // добавить контент на страницу
 
+
 modalFormClose.forEach((modal) => {
   modal.addEventListener('click', (evt) => {
     if (evt.target.classList.contains('modal-form__close')) {
