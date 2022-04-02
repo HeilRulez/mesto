@@ -1,5 +1,0 @@
-.overlay_visible_on {
-    opacity: 1;
-    visibility: visible;
-    transition: opacity .5s linear;
-}
