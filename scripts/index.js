@@ -52,7 +52,7 @@ function openAddCard() {
 
 // Создание карточки контента из шаблона
 function createCard(data, name = '') {
-  let cardCopy = sampleCard.querySelector('.card').cloneNode(true);
+  const cardCopy = sampleCard.querySelector('.card').cloneNode(true);
   cardCopy.querySelector('.card__title').textContent = name;
   cardCopy.querySelector('.card__img').src = data;
   cardCopy.querySelector('.card__img').alt = name;
@@ -64,14 +64,14 @@ function createCard(data, name = '') {
 
 // Добавление карточки в дом
 function addCard(name, data) {
-  let cardItem = createCard(data, name);
+  const cardItem = createCard(data, name);
   cards.prepend(cardItem);
 }
 
 // Отправка контента на страницу
 function btnAddCard(evt) {
   evt.preventDefault();
-  let name = formNameForAddCard.value,
+  const name = formNameForAddCard.value,
     data = formDataForAddCard.value;
   addCard(name, data);
   addDataInbase(cardsData, name, data);
