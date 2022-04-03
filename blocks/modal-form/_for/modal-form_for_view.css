@@ -3,5 +3,10 @@
   background-color: rgba(0, 0, 0, 0);
   border-radius: 0;
   padding: 0;
-  height: 75vh;
+}
+
+@media screen and (min-width: 560px) {
+  .modal-form_for_view {
+    min-width: 1px; /* костыль для положения картинки */
+  }
 }

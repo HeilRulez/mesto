@@ -19,13 +19,13 @@ const overlayForView = document.querySelector('.overlay_for_view'),
   modalFormViewImg = document.querySelector('.modal-form__view-img'),
   modalFormTitleForView = document.querySelector('.modal-form__title_for_view');
 
-// Закрытие любого модального окна
-function closeForm(modal) {
-  modal.classList.remove('overlay_visible');
-}
+  // Закрытие любого модального окна
+  function closeForm(evt) {
+    evt.target.closest('.overlay').classList.remove('overlay_visible');
+  }
 
-// ОТкрытие любого модального окна
-function openModal(modal) {
+  // ОТкрытие любого модального окна
+  function openModal(modal) {
   modal.classList.add('overlay_visible');
 }
 
@@ -107,15 +107,13 @@ formForProfile.addEventListener('submit', saveData, false); // отправка 
 profileAddBtn.addEventListener('click', openAddCard, false); // выбор контента
 formForAddCard.addEventListener('submit', btnAddCard, false); // добавить контент на страницу
 
-
-modalFormClose.forEach((modal) => {
-  modal.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains('modal-form__close')) {
-      let overlay = evt.target.closest('overlay');
-      closeForm(overlay);
-    };
+  modalFormClose.forEach((btnClose) => {
+    btnClose.addEventListener('click', (evt) => {
+      if (evt.target.classList.contains('modal-form__close')) {
+        closeForm(evt);
+      };
+    });
   });
-});
 
 const cardsData = [{
     name: 'Архыз',
