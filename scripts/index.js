@@ -41,7 +41,7 @@ function saveData(evt) {
   evt.preventDefault();
   profileInfoName.textContent = formNameForProfile.value;
   profileInfoDiscription.textContent = formDataForProfile.value;
-  closeForm(evt)
+  closeForm(evt);
 }
 
 // Форма добавления контента
@@ -51,7 +51,7 @@ function openAddCard() {
 }
 
 // Создание карточки контента из шаблона
-function createCard(name = '', data) {
+function createCard(data, name = '') {
   let cardCopy = sampleCard.querySelector('.card').cloneNode(true);
   cardCopy.querySelector('.card__title').textContent = name;
   cardCopy.querySelector('.card__img').src = data;
@@ -64,7 +64,7 @@ function createCard(name = '', data) {
 
 // Добавление карточки в дом
 function addCard(name, data) {
-  let cardItem = createCard(name, data);
+  let cardItem = createCard(data, name);
   cards.prepend(cardItem);
 }
 
@@ -111,7 +111,7 @@ formForAddCard.addEventListener('submit', btnAddCard, false); // добавит�
     btnClose.addEventListener('click', (evt) => {
       if (evt.target.classList.contains('modal-form__close')) {
         closeForm(evt);
-      };
+      }
     });
   });
 
