@@ -9,7 +9,7 @@
   padding: 0;
   background-color: #000;
   color: #fff;
-  margin: 0 auto 22px;
+  margin: 14px auto 22px;
   cursor: pointer;
   border: none;
   transition: opacity .3s ease-in-out;
@@ -22,6 +22,6 @@
 @media screen and (min-width: 560px) {
   .form__btn-submit {
     height: 50px;
-    margin: 0 auto 37px;
+    margin: 18px auto 0;
   }
 }

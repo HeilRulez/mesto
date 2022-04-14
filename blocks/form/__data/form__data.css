@@ -1,7 +1,7 @@
 .form__data {
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, .2);
-  margin-bottom: 45px;
+  margin-bottom: 4px;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
@@ -17,6 +17,6 @@
 
 @media screen and (min-width: 560px) {
   .form__data {
-    margin-bottom: 48px;
+    margin-bottom: 4px;
   }
 }

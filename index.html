@@ -45,9 +45,11 @@
       <div class="modal-form prof">
         <button class="modal-form__close" type="button"></button>
         <h2 class="modal-form__title">Редактировать профиль</h2>
-        <form class="form form_for_profile" name="edit-form">
-          <input class="form__name form__name_for_profile" type="text" name="name-profile" required>
-          <input class="form__data form__data_for_profile" type="text" name="discroption-profile">
+        <form class="form form_for_profile" name="editForm" novalidate>
+          <input class="form__name form__name_for_profile" id="nameInput" type="text" name="nameProfile" minlength="2" maxlength="40" required autocomplete="off">
+          <span class="form__text-error" id="nameInput-error"></span>
+          <input class="form__data form__data_for_profile" id="description" type="text" name="descriptionProfile" minlength="2" maxlength="200" required autocomplete="off">
+          <span class="form__text-error" id="description-error"></span>
           <button class="form__btn-submit" type="submit">Сохранить</button>
         </form>
       </div>
@@ -57,10 +59,11 @@
       <div class="modal-form modal-form_for_addCard">
         <button class="modal-form__close" type="button"></button>
         <h2 class="modal-form__title">Новое место</h2>
-        <form class="form form_for_addCard" name="add-form">
-          <input class="form__name form__name_for_addCard" type="text" name="name-card" placeholder="Название">
-          <input class="form__data form__data_for_addCard" type="text" name="data-card" placeholder="Ссылка на картинку"
-            required>
+        <form class="form form_for_addCard" name="addForm" novalidate>
+          <input class="form__name form__name_for_addCard" id="place" type="text" name="nameCard" placeholder="Название" minlength="2" maxlength="30" required autocomplete="off">
+          <span class="form__text-error" id="place-error"></span>
+          <input class="form__data form__data_for_addCard" id="adress" type="url" name="dataCard" placeholder="Ссылка на картинку" required autocomplete="off">
+          <span class="form__text-error" id="adress-error"></span>
           <button class="form__btn-submit" type="submit">Создать</button>
         </form>
       </div>
@@ -90,6 +93,7 @@
 
   </div>
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/validate.js"></script>
 </body>
 
 </html>
