@@ -1,7 +1,6 @@
 const overlayForProfile = document.querySelector('.overlay_for_profile'),
   profileInfoBtn = document.querySelector('.profile-info__btn'),
   modalFormClose = document.querySelectorAll('.modal-form__close'),
-  formForProfile = document.querySelector('.form_for_profile'),
   formNameForProfile = document.querySelector('.form__name_for_profile'),
   formDataForProfile = document.querySelector('.form__data_for_profile'),
   profileInfoName = document.querySelector('.profile-info__name'),
@@ -9,7 +8,6 @@ const overlayForProfile = document.querySelector('.overlay_for_profile'),
 
 const overlayForAddCard = document.querySelector('.overlay_for_addCard'),
   profileAddBtn = document.querySelector('.profile__add-btn'),
-  formForAddCard = document.querySelector('.form_for_addCard'),
   formNameForAddCard = document.querySelector('.form__name_for_addCard'),
   formDataForAddCard = document.querySelector('.form__data_for_addCard'),
   cards = document.querySelector('.cards'),
@@ -30,7 +28,7 @@ const overlayForView = document.querySelector('.overlay_for_view'),
 }
 
 // Форма данных профиля
-function openEditProfile(evt) {
+function openEditProfile() {
   openModal(overlayForProfile);
   formNameForProfile.value = profileInfoName.textContent;
   formDataForProfile.value = profileInfoDiscription.textContent;
@@ -38,7 +36,6 @@ function openEditProfile(evt) {
 
 // Отправка данных профиля из формы на страницу
 function saveData(evt) {
-  evt.preventDefault();
   profileInfoName.textContent = formNameForProfile.value;
   profileInfoDiscription.textContent = formDataForProfile.value;
   closeForm(evt);
@@ -47,7 +44,6 @@ function saveData(evt) {
 // Форма добавления контента
 function openAddCard() {
   openModal(overlayForAddCard);
-  formForAddCard.reset();
 }
 
 // Создание карточки контента из шаблона
@@ -70,11 +66,11 @@ function addCard(name, data) {
 
 // Отправка контента на страницу
 function btnAddCard(evt) {
-  evt.preventDefault();
   const name = formNameForAddCard.value,
     data = formDataForAddCard.value;
   addCard(name, data);
   addDataInbase(cardsData, name, data);
+  evt.target.reset();
   closeForm(evt);
 }
 
@@ -103,9 +99,7 @@ function scaleImg(evt) {
 }
 
 profileInfoBtn.addEventListener('click', openEditProfile, false); //данные профиля
-formForProfile.addEventListener('submit', saveData, false); // отправка данных профиля
 profileAddBtn.addEventListener('click', openAddCard, false); // выбор контента
-formForAddCard.addEventListener('submit', btnAddCard, false); // добавить контент на страницу
 
   modalFormClose.forEach((btnClose) => {
     btnClose.addEventListener('click', (evt) => {

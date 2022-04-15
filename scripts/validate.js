@@ -2,21 +2,27 @@ const editForm = document.forms.editForm;
 const addForm = document.forms.addForm;
 
 
+const ERRORS = {
+  valMis: "Необходимо заполнить это поле.",
+  toLength: (min, max) => {return `Должно быть от ${min} до ${max} символов.`},
+  typeMis: "Введите адрес ссылки.",
+};
+
 function checkInputValidity(input) {
   input.setCustomValidity("");
 
-  if(input.validity.valueMissing) {
-    input.setCustomValidity("Необходимо заполнить это поле.");
+  if (input.validity.valueMissing) {
+    input.setCustomValidity(ERRORS.valMis);
     return false;
   };
 
-  if(input.validity.tooLong || input.validity.tooShort) {
-    input.setCustomValidity(`Должно быть от ${input.getAttribute("minlength")} до ${input.getAttribute("maxlength")} символов.`);
+  if (input.validity.tooLong || input.validity.tooShort) {
+    input.setCustomValidity(ERRORS.toLength(input.getAttribute("minlength"), input.getAttribute("maxlength")));
     return false;
   };
 
-  if(input.validity.typeMismatch && input.type === "url") {
-    input.setCustomValidity('Введите адрес ссылки.');
+  if (input.validity.typeMismatch && input.type === "url") {
+    input.setCustomValidity(ERRORS.typeMis);
     return false;
   };
 
@@ -29,19 +35,45 @@ function insertTextError(input) {
   errorElement.textContent = input.validationMessage;
 };
 
-// Обработка при вводе в инпут
-function inputTrack(evt) {
-  const input = evt.target;
-  insertTextError(input);
-
+function enableButton(button, classButton) {
+  button.disabled = false;
+  button.classList.remove(classButton);
 };
 
-// Обработчик проверяющий валидность формы при сабмите
+function disabledButton(button, classButton) {
+  button.disabled = true;
+  button.classList.add(classButton);
+};
+
+// Состояние кнопки
+function setButtonState(button, isValid) {
+  if (isValid) {
+    enableButton(button, 'form__btn-submit_disabled');
+  } else {
+    disabledButton(button, 'form__btn-submit_disabled');
+  };
+};
+
+// Обработка при вводе в инпут
+function inputTrack(evt) {
+  const formElement = evt.currentTarget;
+  const input = evt.target;
+  const btnSubmit = formElement.querySelector('.form__btn-submit');
+  insertTextError(input);
+  setButtonState(btnSubmit, formElement.checkValidity());
+};
+
 function validityForm(evt) {
   evt.preventDefault();
-
-  if(evt.target.checkValidity()) {
-    evt.target.resrt();
+  if (evt.target.checkValidity()) {
+    switch (evt.target.name) {
+      case "addForm":
+        btnAddCard(evt);
+        break;
+      case "editForm":
+        saveData(evt);
+        break;
+    };
   }
 };
 
