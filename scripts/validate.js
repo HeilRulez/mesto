@@ -8,6 +8,14 @@ const ERRORS = {
   typeMis: "Введите адрес ссылки.",
 };
 
+function arrayInput(form) {
+  console.log("создание массива");
+  console.log(form.elements);
+  let arrErr = form.elements.filter((elem) => {elem.classList.className.endsWith("-error")});
+  arrErr.forEach(item => item.textContent = "");
+  console.log(arrErr);
+}
+
 function checkInputValidity(input) {
   input.setCustomValidity("");
 
