@@ -12,11 +12,16 @@
   margin: 14px auto 22px;
   cursor: pointer;
   border: none;
+  border-radius: 2px;
   transition: opacity .3s ease-in-out;
 }
 
 .form__btn-submit:hover {
   opacity: .8;
+}
+
+.form__btn-submit:disabled {
+  color: #000;
 }
 
 @media screen and (min-width: 560px) {

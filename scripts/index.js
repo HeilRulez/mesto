@@ -17,14 +17,49 @@ const overlayForView = document.querySelector('.overlay_for_view'),
   modalFormViewImg = document.querySelector('.modal-form__view-img'),
   modalFormTitleForView = document.querySelector('.modal-form__title_for_view');
 
-  // Закрытие любого модального окна
-  function closeForm(evt) {
-    evt.target.closest('.overlay').classList.remove('overlay_visible');
-  }
+// Закрытие любого модального окна
+function closeForm() {
+  const arrForClose = Array.from(document.querySelectorAll('.overlay'));
+  arrForClose.forEach(item => item.classList.remove('overlay_visible'));
+  closeDel();
+}
 
-  // ОТкрытие любого модального окна
-  function openModal(modal) {
+function closeEsc(evt) {
+  if (evt.key === 'Escape') {
+    closeForm();
+  }
+}
+
+function closeOverlay(evt) {
+  if (evt.target.classList.contains('overlay')) {
+    closeForm();
+  }
+}
+
+function closeSet() {
+  document.addEventListener('keydown', closeEsc, false);
+  document.addEventListener('click', closeOverlay, false);
+}
+
+function closeDel() {
+  document.removeEventListener('keydown', closeEsc, false);
+  document.removeEventListener('click', closeOverlay, false);
+}
+
+// Открытие любого модального окна
+function openModal(modal) {
   modal.classList.add('overlay_visible');
+  resetError(modal);
+  closeSet();
+}
+
+function resetError(parent) {
+  const messagesArr = Array.from(parent.querySelectorAll('.form__text-error'));
+  messagesArr.forEach(item => item.textContent = '');
+}
+
+function resetForm(terget) {
+  terget.reset();
 }
 
 // Форма данных профиля
@@ -32,18 +67,21 @@ function openEditProfile() {
   openModal(overlayForProfile);
   formNameForProfile.value = profileInfoName.textContent;
   formDataForProfile.value = profileInfoDiscription.textContent;
+  closeSet();
 }
 
 // Отправка данных профиля из формы на страницу
 function saveData(evt) {
   profileInfoName.textContent = formNameForProfile.value;
   profileInfoDiscription.textContent = formDataForProfile.value;
-  closeForm(evt);
+  closeForm();
 }
 
 // Форма добавления контента
 function openAddCard() {
   openModal(overlayForAddCard);
+  resetForm(overlayForAddCard.querySelector('.form_for_addCard'));
+  disabledButton(overlayForAddCard.querySelector('.form__btn-submit'));
 }
 
 // Создание карточки контента из шаблона
@@ -70,8 +108,7 @@ function btnAddCard(evt) {
     data = formDataForAddCard.value;
   addCard(name, data);
   addDataInbase(cardsData, name, data);
-  evt.target.reset();
-  closeForm(evt);
+  closeForm();
 }
 
 // Тут дожна бфть отправка на сервер
@@ -101,13 +138,14 @@ function scaleImg(evt) {
 profileInfoBtn.addEventListener('click', openEditProfile, false); //данные профиля
 profileAddBtn.addEventListener('click', openAddCard, false); // выбор контента
 
-  modalFormClose.forEach((btnClose) => {
-    btnClose.addEventListener('click', (evt) => {
-      if (evt.target.classList.contains('modal-form__close')) {
-        closeForm(evt);
-      }
-    });
+
+modalFormClose.forEach((btnClose) => {
+  btnClose.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('modal-form__close')) {
+      closeForm();
+    }
   });
+});
 
 const cardsData = [{
     name: 'Архыз',

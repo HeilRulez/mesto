@@ -3,18 +3,12 @@ const addForm = document.forms.addForm;
 
 
 const ERRORS = {
-  valMis: "Необходимо заполнить это поле.",
-  toLength: (min, max) => {return `Должно быть от ${min} до ${max} символов.`},
-  typeMis: "Введите адрес ссылки.",
+  valMis: "Вы пропустили это поле.",
+  toLength: (min, max) => {
+    return `Должно быть от ${min} до ${max} символов.`
+  },
+  typeMis: "Введите адрес сайта.",
 };
-
-function arrayInput(form) {
-  console.log("создание массива");
-  console.log(form.elements);
-  let arrErr = form.elements.filter((elem) => {elem.classList.className.endsWith("-error")});
-  arrErr.forEach(item => item.textContent = "");
-  console.log(arrErr);
-}
 
 function checkInputValidity(input) {
   input.setCustomValidity("");
@@ -43,24 +37,41 @@ function insertTextError(input) {
   errorElement.textContent = input.validationMessage;
 };
 
-function enableButton(button, classButton) {
+function enableButton(button) {
   button.disabled = false;
-  button.classList.remove(classButton);
+  button.classList.remove('form__btn-submit_disabled');
 };
 
-function disabledButton(button, classButton) {
+function disabledButton(button) {
   button.disabled = true;
-  button.classList.add(classButton);
+  button.classList.add('form__btn-submit_disabled');
 };
 
 // Состояние кнопки
 function setButtonState(button, isValid) {
   if (isValid) {
-    enableButton(button, 'form__btn-submit_disabled');
+    enableButton(button);
   } else {
-    disabledButton(button, 'form__btn-submit_disabled');
+    disabledButton(button);
   };
 };
+
+function validInput(input) {
+  input.classList.remove('border-invalid');
+}
+
+function invalidInput(input) {
+  input.classList.add('border-invalid');
+}
+
+// Красное подчёркивание инпута
+function setInvalidInput(input) {
+  if (checkInputValidity(input)) {
+    validInput(input);
+  } else {
+    invalidInput(input);
+  }
+}
 
 // Обработка при вводе в инпут
 function inputTrack(evt) {
@@ -69,6 +80,7 @@ function inputTrack(evt) {
   const btnSubmit = formElement.querySelector('.form__btn-submit');
   insertTextError(input);
   setButtonState(btnSubmit, formElement.checkValidity());
+  setInvalidInput(input);
 };
 
 function validityForm(evt) {

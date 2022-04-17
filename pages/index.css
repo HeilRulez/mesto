@@ -45,3 +45,4 @@
 @import url(../blocks/form/__btn-submit/form__btn-submit.css);
 @import url(../blocks/form/__btn-submit/_disabled/form__btn-submit_disabled.css);
 @import url(../blocks/form/__text-error/form__text-error.css);
+@import url(../blocks/border-invalid/border-invalid.css);
