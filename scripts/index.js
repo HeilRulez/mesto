@@ -38,7 +38,7 @@ function closeOverlay(evt) {
 
 function closeSet() {
   document.addEventListener('keydown', closeEsc, false);
-  document.addEventListener('click', closeOverlay, false);
+  document.addEventListener('mousedown', closeOverlay, false);
 }
 
 function closeDel() {

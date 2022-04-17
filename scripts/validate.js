@@ -97,9 +97,14 @@ function validityForm(evt) {
   }
 };
 
+function enableValidation(form) {
+  form.addEventListener('input', inputTrack, false);
+  form.addEventListener('submit', validityForm, false);
+}
 
-editForm.addEventListener('submit', validityForm, false);
-addForm.addEventListener('submit', validityForm, false);
+enableValidation(editForm);
+enableValidation(addForm);
 
-editForm.addEventListener('input', inputTrack, false);
-addForm.addEventListener('input', inputTrack, false);
+// Я понятия не имею зачем вообще пихать объект в функцию enableValidation.
+// Если из неё я не могу, без всяких костылей, передать классы или дом элементы по функциям.
+// Может всё дело что реализация валидации сделана по другому принципу.
