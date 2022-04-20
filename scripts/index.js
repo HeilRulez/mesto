@@ -1,6 +1,6 @@
 const overlayForProfile = document.querySelector('.overlay_for_profile'),
   profileInfoBtn = document.querySelector('.profile-info__btn'),
-  modalFormClose = document.querySelectorAll('.modal-form__close'),
+  modalFormCloseAll = document.querySelectorAll('.modal-form__close'),
   formNameForProfile = document.querySelector('.form__name_for_profile'),
   formDataForProfile = document.querySelector('.form__data_for_profile'),
   profileInfoName = document.querySelector('.profile-info__name'),
@@ -17,40 +17,39 @@ const overlayForView = document.querySelector('.overlay_for_view'),
   modalFormViewImg = document.querySelector('.modal-form__view-img'),
   modalFormTitleForView = document.querySelector('.modal-form__title_for_view');
 
+const overlay_visible = 'overlay_visible';
+
 // Закрытие любого модального окна
-function closeForm() {
-  const arrForClose = Array.from(document.querySelectorAll('.overlay'));
-  arrForClose.forEach(item => item.classList.remove('overlay_visible'));
-  closeDel();
+function closeModal(evt) {
+  evt.classList.remove(overlay_visible);
+  deleteListenerClose();
 }
 
-function closeEsc(evt) {
+function closeModalOnEsc(evt) {
   if (evt.key === 'Escape') {
-    closeForm();
+    Array.from(modalFormCloseAll).forEach((item) => {
+      if (item.closest('.overlay').classList.contains(overlay_visible)) {
+        closeModal(item.closest('.overlay'));
+      }
+    });
   }
 }
 
-function closeOverlay(evt) {
-  if (evt.target.classList.contains('overlay')) {
-    closeForm();
+function closeModalOnOverlay(evt) {
+  if (evt.target.classList.contains(overlay_visible)) {
+    closeModal(evt.target);
   }
 }
 
-function closeSet() {
-  document.addEventListener('keydown', closeEsc, false);
-  document.addEventListener('mousedown', closeOverlay, false);
+function setListenerClose() {
+  document.addEventListener('keydown', closeModalOnEsc, false);
+  document.addEventListener('mousedown', closeModalOnOverlay, false);
+
 }
 
-function closeDel() {
-  document.removeEventListener('keydown', closeEsc, false);
-  document.removeEventListener('click', closeOverlay, false);
-}
-
-// Открытие любого модального окна
-function openModal(modal) {
-  modal.classList.add('overlay_visible');
-  resetError(modal);
-  closeSet();
+function deleteListenerClose() {
+  document.removeEventListener('keydown', closeModalOnEsc, false);
+  document.removeEventListener('mousedown', closeModalOnOverlay, false);
 }
 
 function resetError(parent) {
@@ -58,65 +57,66 @@ function resetError(parent) {
   messagesArr.forEach(item => item.textContent = '');
 }
 
-function resetForm(terget) {
-  terget.reset();
+// Открытие любого модального окна
+function openModal(modal) {
+  modal.classList.add(overlay_visible);
+  resetError(modal);
+  setListenerClose();
+}
+
+function resetForm(target) {
+  target.reset();
+  resetStyleInputError(target);
 }
 
 // Форма данных профиля
 function openEditProfile() {
-  openModal(overlayForProfile);
   formNameForProfile.value = profileInfoName.textContent;
   formDataForProfile.value = profileInfoDiscription.textContent;
-  closeSet();
+  openModal(overlayForProfile);
 }
 
 // Отправка данных профиля из формы на страницу
 function saveData(evt) {
   profileInfoName.textContent = formNameForProfile.value;
   profileInfoDiscription.textContent = formDataForProfile.value;
-  closeForm();
+  closeModal(evt.target.closest('.overlay'));
 }
 
 // Форма добавления контента
 function openAddCard() {
   openModal(overlayForAddCard);
   resetForm(overlayForAddCard.querySelector('.form_for_addCard'));
-  disabledButton(overlayForAddCard.querySelector('.form__btn-submit'));
+  disableButton(overlayForAddCard.querySelector('.form__btn-submit'));
 }
 
 // Создание карточки контента из шаблона
-function createCard(data, name = '') {
+function createCard(cardData) {
   const cardCopy = sampleCard.querySelector('.card').cloneNode(true);
-  cardCopy.querySelector('.card__title').textContent = name;
-  cardCopy.querySelector('.card__img').src = data;
-  cardCopy.querySelector('.card__img').alt = name;
+  const lmgElement = cardCopy.querySelector('.card__img');
+  cardCopy.querySelector('.card__title').textContent = cardData.name;
+  lmgElement.src = cardData.link;
+  lmgElement.alt = cardData.name;
   cardCopy.querySelector('.card__del').addEventListener('click', delCard, false);
   cardCopy.querySelector('.card__like').addEventListener('click', likeCard, false);
-  cardCopy.querySelector('.card__img').addEventListener('click', scaleImg, false);
+  lmgElement.addEventListener('click', () => scaleImg(cardData), false);
   return cardCopy;
 }
 
 // Добавление карточки в дом
-function addCard(name, data) {
-  const cardItem = createCard(data, name);
+function addCard(cardData) {
+  const cardItem = createCard(cardData);
   cards.prepend(cardItem);
 }
 
 // Отправка контента на страницу
-function btnAddCard(evt) {
-  const name = formNameForAddCard.value,
-    data = formDataForAddCard.value;
-  addCard(name, data);
-  addDataInbase(cardsData, name, data);
-  closeForm();
-}
-
-// Тут дожна бфть отправка на сервер
-function addDataInbase(item, name, data) {
-  item.push({
-    name: name,
-    link: data
-  });
+function addNewCard(evt) {
+  const cardData = {
+    name: formNameForAddCard.value,
+    link: formDataForAddCard.value
+  };
+  addCard(cardData);
+  closeModal(evt.target.closest('.overlay'));
 }
 
 function delCard(evt) {
@@ -128,50 +128,24 @@ function likeCard(evt) {
 }
 
 // Увеличение картинки
-function scaleImg(evt) {
+function scaleImg(cardData) {
+  modalFormViewImg.src = cardData.link;
+  modalFormViewImg.alt = cardData.name;
+  modalFormTitleForView.textContent = cardData.name;
   openModal(overlayForView);
-  modalFormViewImg.src = evt.target.src;
-  modalFormViewImg.alt = evt.target.alt;
-  modalFormTitleForView.textContent = evt.target.alt;
 }
 
 profileInfoBtn.addEventListener('click', openEditProfile, false); //данные профиля
 profileAddBtn.addEventListener('click', openAddCard, false); // выбор контента
 
 
-modalFormClose.forEach((btnClose) => {
+modalFormCloseAll.forEach((btnClose) => {
   btnClose.addEventListener('click', (evt) => {
     if (evt.target.classList.contains('modal-form__close')) {
-      closeForm();
+      closeModal(evt.target.closest('.overlay'));
     }
   });
 });
 
-const cardsData = [{
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 // Отрисовка сохранённых карточек
-cardsData.forEach((item) => addCard(item.name, item.link));
+cardsData.forEach(item => addCard(item));

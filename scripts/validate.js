@@ -12,26 +12,27 @@ const ERRORS = {
 
 function checkInputValidity(input) {
   input.setCustomValidity("");
-
   if (input.validity.valueMissing) {
     input.setCustomValidity(ERRORS.valMis);
-    return false;
   };
-
   if (input.validity.tooLong || input.validity.tooShort) {
     input.setCustomValidity(ERRORS.toLength(input.getAttribute("minlength"), input.getAttribute("maxlength")));
-    return false;
   };
-
   if (input.validity.typeMismatch && input.type === "url") {
     input.setCustomValidity(ERRORS.typeMis);
-    return false;
   };
-
-  return input.checkValidity();
 };
 
-function insertTextError(input) {
+function resetStyleInputError(target) {
+  const allInputsInForm = Array.from(target.querySelectorAll('input'));
+  allInputsInForm.forEach(input => {
+    if (input.classList.contains('border-invalid')) {
+      setInputStyleValid(input);
+    }
+  });
+}
+
+function insertErrorText(input) {
   const errorElement = input.parentNode.querySelector(`#${input.id}-error`);
   checkInputValidity(input);
   errorElement.textContent = input.validationMessage;
@@ -42,7 +43,7 @@ function enableButton(button) {
   button.classList.remove('form__btn-submit_disabled');
 };
 
-function disabledButton(button) {
+function disableButton(button) {
   button.disabled = true;
   button.classList.add('form__btn-submit_disabled');
 };
@@ -52,35 +53,35 @@ function setButtonState(button, isValid) {
   if (isValid) {
     enableButton(button);
   } else {
-    disabledButton(button);
+    disableButton(button);
   };
 };
 
-function validInput(input) {
+function setInputStyleValid(input) {
   input.classList.remove('border-invalid');
 }
 
-function invalidInput(input) {
+function setInputStyleInvalid(input) {
   input.classList.add('border-invalid');
 }
 
 // Красное подчёркивание инпута
-function setInvalidInput(input) {
-  if (checkInputValidity(input)) {
-    validInput(input);
+function setStyleInput(input) {
+  if (input.checkValidity()) {
+    setInputStyleValid(input);
   } else {
-    invalidInput(input);
+    setInputStyleInvalid(input);
   }
 }
 
 // Обработка при вводе в инпут
-function inputTrack(evt) {
+function trackInput(evt) {
   const formElement = evt.currentTarget;
   const input = evt.target;
   const btnSubmit = formElement.querySelector('.form__btn-submit');
-  insertTextError(input);
+  insertErrorText(input);
   setButtonState(btnSubmit, formElement.checkValidity());
-  setInvalidInput(input);
+  setStyleInput(input);
 };
 
 function validityForm(evt) {
@@ -88,7 +89,7 @@ function validityForm(evt) {
   if (evt.target.checkValidity()) {
     switch (evt.target.name) {
       case "addForm":
-        btnAddCard(evt);
+        addNewCard(evt);
         break;
       case "editForm":
         saveData(evt);
@@ -98,13 +99,10 @@ function validityForm(evt) {
 };
 
 function enableValidation(form) {
-  form.addEventListener('input', inputTrack, false);
+  form.addEventListener('input', trackInput, false);
   form.addEventListener('submit', validityForm, false);
 }
 
 enableValidation(editForm);
 enableValidation(addForm);
 
-// Я понятия не имею зачем вообще пихать объект в функцию enableValidation.
-// Если из неё я не могу, без всяких костылей, передать классы или дом элементы по функциям.
-// Может всё дело что реализация валидации сделана по другому принципу.
