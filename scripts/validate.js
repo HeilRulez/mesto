@@ -1,6 +1,11 @@
-const editForm = document.forms.editForm;
-const addForm = document.forms.addForm;
 
+const classCollection = {
+  formSelector: '.form',
+  submitButtonSelector: '.form__btn-submit',
+  inactiveButtonClass: 'form__btn-submit_disabled',
+  errorClass: '-error',
+  inputStyleError: 'border-invalid',
+};
 
 const ERRORS = {
   valMis: "Вы пропустили это поле.",
@@ -21,48 +26,54 @@ function checkInputValidity(input) {
   if (input.validity.typeMismatch && input.type === "url") {
     input.setCustomValidity(ERRORS.typeMis);
   };
-};
+}
 
 function resetStyleInputError(target) {
   const allInputsInForm = Array.from(target.querySelectorAll('input'));
   allInputsInForm.forEach(input => {
-    if (input.classList.contains('border-invalid')) {
+    if (input.classList.contains(classCollection.inputStyleError)) {
       setInputStyleValid(input);
     }
   });
 }
 
 function insertErrorText(input) {
+  console.log(input);
   const errorElement = input.parentNode.querySelector(`#${input.id}-error`);
   checkInputValidity(input);
   errorElement.textContent = input.validationMessage;
-};
+}
 
 function enableButton(button) {
   button.disabled = false;
-  button.classList.remove('form__btn-submit_disabled');
-};
+  button.classList.remove(classCollection.inactiveButtonClass);
+}
 
 function disableButton(button) {
   button.disabled = true;
-  button.classList.add('form__btn-submit_disabled');
-};
+  button.classList.add(classCollection.inactiveButtonClass);
+}
 
 // Состояние кнопки
 function setButtonState(button, isValid) {
+  // Спасибо за коментари, но мне не понятно зачем делать дорогую
+  // операцию по перебору (возможных) 100500 инпутов, если браузер
+  // и так следит за ними и говорит, валидна ли вся форма.
+  // Там более что результат так же будет взят за пределами этой функии.
+  // Поясните пожулуйста, если ошибаюсь.
   if (isValid) {
     enableButton(button);
   } else {
     disableButton(button);
   };
-};
+}
 
 function setInputStyleValid(input) {
-  input.classList.remove('border-invalid');
+  input.classList.remove(classCollection.inputStyleError);
 }
 
 function setInputStyleInvalid(input) {
-  input.classList.add('border-invalid');
+  input.classList.add(classCollection.inputStyleError);
 }
 
 // Красное подчёркивание инпута
@@ -78,31 +89,26 @@ function setStyleInput(input) {
 function trackInput(evt) {
   const formElement = evt.currentTarget;
   const input = evt.target;
-  const btnSubmit = formElement.querySelector('.form__btn-submit');
+  const btnSubmit = formElement.querySelector(classCollection.submitButtonSelector);
   insertErrorText(input);
   setButtonState(btnSubmit, formElement.checkValidity());
   setStyleInput(input);
-};
+}
 
 function validityForm(evt) {
   evt.preventDefault();
-  if (evt.target.checkValidity()) {
-    switch (evt.target.name) {
-      case "addForm":
-        addNewCard(evt);
-        break;
-      case "editForm":
-        saveData(evt);
-        break;
-    };
-  }
-};
-
-function enableValidation(form) {
-  form.addEventListener('input', trackInput, false);
-  form.addEventListener('submit', validityForm, false);
 }
 
-enableValidation(editForm);
-enableValidation(addForm);
+function setEventListeners(form) {
+  form.addEventListener('input', trackInput);
+  form.addEventListener('submit', validityForm);
+}
+
+
+function enableValidation(obj) {
+  const forms = Array.from(document.querySelectorAll(obj.formSelector));
+  forms.forEach(form => setEventListeners(form));
+}
+
+enableValidation(classCollection);
 

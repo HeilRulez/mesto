@@ -1,6 +1,7 @@
 const overlayForProfile = document.querySelector('.overlay_for_profile'),
   profileInfoBtn = document.querySelector('.profile-info__btn'),
   modalFormCloseAll = document.querySelectorAll('.modal-form__close'),
+  formForProfile = document.querySelector('.form_for_profile'),
   formNameForProfile = document.querySelector('.form__name_for_profile'),
   formDataForProfile = document.querySelector('.form__data_for_profile'),
   profileInfoName = document.querySelector('.profile-info__name'),
@@ -8,6 +9,7 @@ const overlayForProfile = document.querySelector('.overlay_for_profile'),
 
 const overlayForAddCard = document.querySelector('.overlay_for_addCard'),
   profileAddBtn = document.querySelector('.profile__add-btn'),
+  formForAddCard = document.querySelector('.form_for_addCard'),
   formNameForAddCard = document.querySelector('.form__name_for_addCard'),
   formDataForAddCard = document.querySelector('.form__data_for_addCard'),
   cards = document.querySelector('.cards'),
@@ -135,8 +137,10 @@ function scaleImg(cardData) {
   openModal(overlayForView);
 }
 
-profileInfoBtn.addEventListener('click', openEditProfile, false); //данные профиля
-profileAddBtn.addEventListener('click', openAddCard, false); // выбор контента
+profileInfoBtn.addEventListener('click', openEditProfile);
+profileAddBtn.addEventListener('click', openAddCard);
+formForProfile.addEventListener('submit', saveData);
+formForAddCard.addEventListener('submit', addNewCard);
 
 
 modalFormCloseAll.forEach((btnClose) => {
