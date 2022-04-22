@@ -1,6 +1,6 @@
-
 const classCollection = {
   formSelector: '.form',
+  inputSelector: 'input',
   submitButtonSelector: '.form__btn-submit',
   inactiveButtonClass: 'form__btn-submit_disabled',
   errorClass: '-error',
@@ -28,87 +28,75 @@ function checkInputValidity(input) {
   };
 }
 
-function resetStyleInputError(target) {
-  const allInputsInForm = Array.from(target.querySelectorAll('input'));
-  allInputsInForm.forEach(input => {
-    if (input.classList.contains(classCollection.inputStyleError)) {
-      setInputStyleValid(input);
-    }
-  });
-}
-
-function insertErrorText(input) {
-  console.log(input);
-  const errorElement = input.parentNode.querySelector(`#${input.id}-error`);
+function insertErrorText(input, obj) {
+  const errorElement = input.parentNode.querySelector(`#${input.id}${obj.errorClass}`);
   checkInputValidity(input);
   errorElement.textContent = input.validationMessage;
 }
 
-function enableButton(button) {
+function enableButton(button, obj) {
   button.disabled = false;
-  button.classList.remove(classCollection.inactiveButtonClass);
+  button.classList.remove(obj.inactiveButtonClass);
 }
 
-function disableButton(button) {
+function disableButton(button, obj) {
   button.disabled = true;
-  button.classList.add(classCollection.inactiveButtonClass);
+  button.classList.add(obj.inactiveButtonClass);
 }
 
 // Состояние кнопки
-function setButtonState(button, isValid) {
-  // Спасибо за коментари, но мне не понятно зачем делать дорогую
-  // операцию по перебору (возможных) 100500 инпутов, если браузер
-  // и так следит за ними и говорит, валидна ли вся форма.
-  // Там более что результат так же будет взят за пределами этой функии.
-  // Поясните пожулуйста, если ошибаюсь.
-  if (isValid) {
-    enableButton(button);
+function setButtonState(button, obj) {
+  const form = button.parentNode.checkValidity();
+  if (form) {
+    enableButton(button, obj);
   } else {
-    disableButton(button);
+    disableButton(button, obj);
   };
 }
 
-function setInputStyleValid(input) {
-  input.classList.remove(classCollection.inputStyleError);
+function setInputStyleValid(input, obj) {
+  input.classList.remove(obj.inputStyleError);
 }
 
-function setInputStyleInvalid(input) {
-  input.classList.add(classCollection.inputStyleError);
+function setInputStyleInvalid(input, obj) {
+  input.classList.add(obj.inputStyleError);
 }
 
 // Красное подчёркивание инпута
-function setStyleInput(input) {
-  if (input.checkValidity()) {
-    setInputStyleValid(input);
+function setStyleInput(input, obj) {
+  if (input.validity.valid) {
+    setInputStyleValid(input, obj);
   } else {
-    setInputStyleInvalid(input);
+    setInputStyleInvalid(input, obj);
   }
 }
 
 // Обработка при вводе в инпут
-function trackInput(evt) {
-  const formElement = evt.currentTarget;
-  const input = evt.target;
-  const btnSubmit = formElement.querySelector(classCollection.submitButtonSelector);
-  insertErrorText(input);
-  setButtonState(btnSubmit, formElement.checkValidity());
-  setStyleInput(input);
+function trackInput(obj, inputsArr) {
+  return function (evt) {
+    const input = evt.target;
+    const btnSubmit = evt.target.parentNode.querySelector(obj.submitButtonSelector);
+    insertErrorText(input, obj);
+    setButtonState(btnSubmit, obj);
+    setStyleInput(input, obj);
+  }
 }
 
 function validityForm(evt) {
   evt.preventDefault();
 }
 
-function setEventListeners(form) {
-  form.addEventListener('input', trackInput);
-  form.addEventListener('submit', validityForm);
+function setEventListeners(form, obj) {
+  const inputsArr = Array.from(form.querySelectorAll(obj.inputSelector));
+  inputsArr.forEach(input => input.addEventListener('input', trackInput(obj, inputsArr)));
 }
-
 
 function enableValidation(obj) {
   const forms = Array.from(document.querySelectorAll(obj.formSelector));
-  forms.forEach(form => setEventListeners(form));
+  forms.forEach(form => {
+    form.addEventListener('submit', validityForm);
+    setEventListeners(form, obj);
+  });
 }
 
 enableValidation(classCollection);
-
