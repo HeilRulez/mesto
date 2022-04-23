@@ -106,13 +106,13 @@ function openAddCard() {
 // Создание карточки контента из шаблона
 function createCard(cardData) {
   const cardCopy = sampleCard.querySelector('.card').cloneNode(true);
-  const lmgElement = cardCopy.querySelector('.card__img');
+  const imgElement = cardCopy.querySelector('.card__img');
   cardCopy.querySelector('.card__title').textContent = cardData.name;
-  lmgElement.src = cardData.link;
-  lmgElement.alt = cardData.name;
+  imgElement.src = cardData.link;
+  imgElement.alt = cardData.name;
   cardCopy.querySelector('.card__del').addEventListener('click', delCard, false);
   cardCopy.querySelector('.card__like').addEventListener('click', likeCard, false);
-  lmgElement.addEventListener('click', () => scaleImg(cardData), false);
+  imgElement.addEventListener('click', () => scaleImg(cardData), false);
   return cardCopy;
 }
 
@@ -163,4 +163,4 @@ modalFormCloseAll.forEach((btnClose) => {
 });
 
 // Отрисовка сохранённых карточек
-cardsData.forEach(item => addCard(item));
+cardsData.forEach(addCard);
