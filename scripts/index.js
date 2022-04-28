@@ -1,3 +1,5 @@
+import Card from './card.js';
+
 const overlayForProfile = document.querySelector('.overlay_for_profile'),
   profileInfoBtn = document.querySelector('.profile-info__btn'),
   modalFormCloseAll = document.querySelectorAll('.modal-form__close'),
@@ -12,14 +14,40 @@ const overlayForAddCard = document.querySelector('.overlay_for_addCard'),
   formForAddCard = document.querySelector('.form_for_addCard'),
   formNameForAddCard = document.querySelector('.form__name_for_addCard'),
   formDataForAddCard = document.querySelector('.form__data_for_addCard'),
-  cards = document.querySelector('.cards'),
-  sampleCard = document.querySelector('.sample-card').content;
+  cards = document.querySelector('.cards');
 
 const overlayForView = document.querySelector('.overlay_for_view'),
   modalFormViewImg = document.querySelector('.modal-form__view-img'),
   modalFormTitleForView = document.querySelector('.modal-form__title_for_view');
 
 const overlayVisible = 'overlay_visible';
+
+const cardsData = [{
+  name: 'Архыз',
+  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+},
+{
+  name: 'Челябинская область',
+  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+},
+{
+  name: 'Иваново',
+  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+},
+{
+  name: 'Камчатка',
+  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+},
+{
+  name: 'Холмогорский район',
+  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+},
+{
+  name: 'Байкал',
+  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+}
+];
+
 
 // Закрытие любого модального окна
 function closeModal(modal) {
@@ -103,23 +131,10 @@ function openAddCard() {
   inactiveButton(overlayForAddCard);
 }
 
-// Создание карточки контента из шаблона
-function createCard(cardData) {
-  const cardCopy = sampleCard.querySelector('.card').cloneNode(true);
-  const imgElement = cardCopy.querySelector('.card__img');
-  cardCopy.querySelector('.card__title').textContent = cardData.name;
-  imgElement.src = cardData.link;
-  imgElement.alt = cardData.name;
-  cardCopy.querySelector('.card__del').addEventListener('click', delCard, false);
-  cardCopy.querySelector('.card__like').addEventListener('click', likeCard, false);
-  imgElement.addEventListener('click', () => scaleImg(cardData), false);
-  return cardCopy;
-}
-
 // Добавление карточки в дом
 function addCard(cardData) {
-  const cardItem = createCard(cardData);
-  cards.prepend(cardItem);
+  const cardItem = new Card(cardData, '.sample-card');
+  cards.prepend(cardItem.getCard());
 }
 
 // Отправка контента на страницу
@@ -130,14 +145,6 @@ function addNewCard(evt) {
   };
   addCard(cardData);
   closeModal(evt.target.closest('.overlay'));
-}
-
-function delCard(evt) {
-  evt.target.closest('.card').remove();
-}
-
-function likeCard(evt) {
-  evt.target.classList.toggle("card__like_active");
 }
 
 // Увеличение картинки
