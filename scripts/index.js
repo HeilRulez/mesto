@@ -147,14 +147,6 @@ function addNewCard(evt) {
   closeModal(evt.target.closest('.overlay'));
 }
 
-// Увеличение картинки
-function scaleImg(cardData) {
-  modalFormViewImg.src = cardData.link;
-  modalFormViewImg.alt = cardData.name;
-  modalFormTitleForView.textContent = cardData.name;
-  openModal(overlayForView);
-}
-
 profileInfoBtn.addEventListener('click', openEditProfile);
 profileAddBtn.addEventListener('click', openAddCard);
 formForProfile.addEventListener('submit', saveData);

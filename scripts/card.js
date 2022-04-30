@@ -10,16 +10,17 @@ export default class Card {
       .content
       .querySelector('.card')
       .cloneNode(true);
-    const imgElement = cardCopy.querySelector('.card__img');
+
     cardCopy.querySelector('.card__title').textContent = cardData.name;
     imgElement.src = cardData.link;
     imgElement.alt = cardData.name;
     this._setEventListeners(cardCopy);
-    imgElement.addEventListener('click', () => scaleImg(cardData));
     return cardCopy;
   }
 
   _setEventListeners(cardCopy) {
+    const imgElement = cardCopy.querySelector('.card__img');
+    imgElement.addEventListener('click', this._scaleImg(this._cardData));
     cardCopy.querySelector('.card__del').addEventListener('click', this._delCard);
     cardCopy.querySelector('.card__like').addEventListener('click', this._likeCard);
   }
@@ -32,6 +33,12 @@ export default class Card {
     evt.target.classList.toggle("card__like_active");
   }
 
+  _scaleImg(cardData) {
+    // modalFormViewImg.src = cardData.link;
+    // modalFormViewImg.alt = cardData.name;
+    // modalFormTitleForView.textContent = cardData.name;
+    // openModal(overlayForView);
+  }
 
   getCard() {
     return this._createCard(this._cardData);
