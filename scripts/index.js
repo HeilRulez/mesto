@@ -16,11 +16,16 @@ const overlayForAddCard = document.querySelector('.overlay_for_addCard'),
   formDataForAddCard = document.querySelector('.form__data_for_addCard'),
   cards = document.querySelector('.cards');
 
-const overlayForView = document.querySelector('.overlay_for_view'),
-  modalFormViewImg = document.querySelector('.modal-form__view-img'),
-  modalFormTitleForView = document.querySelector('.modal-form__title_for_view');
-
 const overlayVisible = 'overlay_visible';
+
+const classCollection = {
+  formSelector: '.form',
+  inputSelector: 'input',
+  submitButtonSelector: '.form__btn-submit',
+  inactiveButtonClass: 'form__btn-submit_disabled',
+  errorClass: '-error',
+  inputStyleError: 'border-invalid',
+};
 
 const cardsData = [{
   name: 'Архыз',
@@ -133,7 +138,7 @@ function openAddCard() {
 
 // Добавление карточки в дом
 function addCard(cardData) {
-  const cardItem = new Card(cardData, '.sample-card');
+  const cardItem = new Card(cardData, openModal, '.sample-card');
   cards.prepend(cardItem.getCard());
 }
 

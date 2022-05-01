@@ -1,11 +1,3 @@
-const classCollection = {
-  formSelector: '.form',
-  inputSelector: 'input',
-  submitButtonSelector: '.form__btn-submit',
-  inactiveButtonClass: 'form__btn-submit_disabled',
-  errorClass: '-error',
-  inputStyleError: 'border-invalid',
-};
 
 const ERRORS = {
   valMis: "Вы пропустили это поле.",
