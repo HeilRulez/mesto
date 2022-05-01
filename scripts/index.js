@@ -1,7 +1,9 @@
 import Card from './card.js';
+import FormValidator from './validate.js';
 
 const overlayForProfile = document.querySelector('.overlay_for_profile'),
   profileInfoBtn = document.querySelector('.profile-info__btn'),
+  forms = document.querySelectorAll('.form'),
   modalFormCloseAll = document.querySelectorAll('.modal-form__close'),
   formForProfile = document.querySelector('.form_for_profile'),
   formNameForProfile = document.querySelector('.form__name_for_profile'),
@@ -19,7 +21,6 @@ const overlayForAddCard = document.querySelector('.overlay_for_addCard'),
 const overlayVisible = 'overlay_visible';
 
 const classCollection = {
-  formSelector: '.form',
   inputSelector: 'input',
   submitButtonSelector: '.form__btn-submit',
   inactiveButtonClass: 'form__btn-submit_disabled',
@@ -54,6 +55,11 @@ const cardsData = [{
 ];
 
 
+function deleteListenerClose() {
+  document.removeEventListener('keydown', closeModalOnEsc);
+  document.removeEventListener('mousedown', closeModalOnOverlay);
+}
+
 // Закрытие любого модального окна
 function closeModal(modal) {
   modal.classList.remove(overlayVisible);
@@ -67,30 +73,25 @@ function closeModalOnEsc(evt) {
   }
 }
 
-function closeModalOnOverlay(modal) {
-  if (modal.target.classList.contains(overlayVisible)) {
-    closeModal(modal.target);
+function closeModalOnOverlay(evt) {
+  if (evt.target.classList.contains(overlayVisible)) {
+    closeModal(evt.target);
   }
 }
 
 function setListenerClose() {
-  document.addEventListener('keydown', closeModalOnEsc, false);
-  document.addEventListener('mousedown', closeModalOnOverlay, false);
+  document.addEventListener('keydown', closeModalOnEsc);
+  document.addEventListener('mousedown', closeModalOnOverlay);
 
 }
 
-function deleteListenerClose() {
-  document.removeEventListener('keydown', closeModalOnEsc, false);
-  document.removeEventListener('mousedown', closeModalOnOverlay, false);
-}
-
-function resetError(parent, obj) {
-  const messagesArr = Array.from(parent.querySelectorAll('.form__text-error'));
-  const allInputsInForm = Array.from(parent.querySelectorAll('input'));
+function resetError(modal) {
+  const messagesArr = Array.from(modal.querySelectorAll('.form__text-error'));
+  const allInputsInForm = Array.from(modal.querySelectorAll('input'));
   messagesArr.forEach(item => item.textContent = '');
   allInputsInForm.forEach(input => {
-    if (input.classList.contains(obj.inputStyleError)) {
-      setInputStyleValid(input, obj);
+    if (input.classList.contains('border-invalid')) {
+      input.classList.remove('border-invalid');
     }
   });
 }
@@ -111,7 +112,9 @@ function openEditProfile() {
   formNameForProfile.value = profileInfoName.textContent;
   formDataForProfile.value = profileInfoDiscription.textContent;
   openModal(overlayForProfile);
-  const evt = new Event('input'); //немного костылей для кнопки
+
+//немного костылей для кнопки
+  const evt = new Event('input');
   formNameForProfile.dispatchEvent(evt);
   formDataForProfile.dispatchEvent(evt);
 }
@@ -132,8 +135,8 @@ function inactiveButton(form) {
 // Форма добавления контента
 function openAddCard() {
   openModal(overlayForAddCard);
-  resetForm(overlayForAddCard.querySelector('.form_for_addCard'));
-  inactiveButton(overlayForAddCard);
+  resetForm(formForAddCard);
+  inactiveButton(formForAddCard);
 }
 
 // Добавление карточки в дом
@@ -164,6 +167,12 @@ modalFormCloseAll.forEach((btnClose) => {
       closeModal(evt.target.closest('.overlay'));
     }
   });
+});
+
+// подключение валидации формам
+forms.forEach(form => {
+  const validation = new FormValidator(classCollection, form);
+  validation.enableValidation();
 });
 
 // Отрисовка сохранённых карточек
