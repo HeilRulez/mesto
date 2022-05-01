@@ -1,5 +1,5 @@
-import Card from './card.js';
-import FormValidator from './validate.js';
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
 
 const overlayForProfile = document.querySelector('.overlay_for_profile'),
   profileInfoBtn = document.querySelector('.profile-info__btn'),
@@ -18,14 +18,17 @@ const overlayForAddCard = document.querySelector('.overlay_for_addCard'),
   formDataForAddCard = document.querySelector('.form__data_for_addCard'),
   cards = document.querySelector('.cards');
 
+const overlayForView = document.querySelector('.overlay_for_view');
+
 const overlayVisible = 'overlay_visible';
 
 const classCollection = {
-  inputSelector: 'input',
+  inputSelector: '.form__input',
   submitButtonSelector: '.form__btn-submit',
   inactiveButtonClass: 'form__btn-submit_disabled',
   errorClass: '-error',
   inputStyleError: 'border-invalid',
+  errorClass: 'form__text-error'
 };
 
 const cardsData = [{
@@ -82,24 +85,11 @@ function closeModalOnOverlay(evt) {
 function setListenerClose() {
   document.addEventListener('keydown', closeModalOnEsc);
   document.addEventListener('mousedown', closeModalOnOverlay);
-
-}
-
-function resetError(modal) {
-  const messagesArr = Array.from(modal.querySelectorAll('.form__text-error'));
-  const allInputsInForm = Array.from(modal.querySelectorAll('input'));
-  messagesArr.forEach(item => item.textContent = '');
-  allInputsInForm.forEach(input => {
-    if (input.classList.contains('border-invalid')) {
-      input.classList.remove('border-invalid');
-    }
-  });
 }
 
 // Открытие любого модального окна
 function openModal(modal) {
   modal.classList.add(overlayVisible);
-  resetError(modal, classCollection);
   setListenerClose();
 }
 
@@ -111,6 +101,7 @@ function resetForm(target) {
 function openEditProfile() {
   formNameForProfile.value = profileInfoName.textContent;
   formDataForProfile.value = profileInfoDiscription.textContent;
+  resetError();    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   openModal(overlayForProfile);
 
 //немного костылей для кнопки
@@ -135,13 +126,21 @@ function inactiveButton(form) {
 // Форма добавления контента
 function openAddCard() {
   openModal(overlayForAddCard);
+  resetError();                     !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   resetForm(formForAddCard);
   inactiveButton(formForAddCard);
 }
 
+function handleCardClick(name, link) {
+  this._modalFormViewImg.src = link;
+  this._modalFormViewImg.alt = name;
+  this._modalFormTitleForView.textContent = name;
+  openModal(overlayForView);
+}
+
 // Добавление карточки в дом
 function addCard(cardData) {
-  const cardItem = new Card(cardData, openModal, '.sample-card');
+  const cardItem = new Card(cardData, handleCardClick, '.sample-card');
   cards.prepend(cardItem.getCard());
 }
 
