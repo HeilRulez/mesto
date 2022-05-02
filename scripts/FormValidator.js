@@ -69,12 +69,12 @@ export default class FormValidator {
   }
 
   _insertErrorText(input) {
-    const errorElement = input.parentNode.querySelector(`#${input.id}${this._obj.errorClass}`);
+    const errorElement = input.parentNode.querySelector(`#${input.id}${this._obj.errorId}`);
     this._checkInputValidity(input);
     errorElement.textContent = input.validationMessage;
   }
 
-  _trackInput(evt) {
+  _trackInput(evt){
     const input = evt.target;
     this._insertErrorText(input);
     this._setButtonState();
@@ -82,7 +82,7 @@ export default class FormValidator {
   }
 
   _setEventListeners() {
-    this._inputList.forEach(input => input.addEventListener('input', this._trackInput));
+    this._inputList.forEach(input => input.addEventListener('input', (evt) => this._trackInput(evt)));
   }
 
   enableValidation() {
@@ -98,5 +98,10 @@ export default class FormValidator {
         input.classList.remove(this._obj.inputStyleError);
       }
     });
+  }
+
+  inactiveButton() {
+    this._btnSubmit.setAttribute("disabled", true);
+    this._btnSubmit.classList.add(this._obj.inactiveButtonClass);
   }
 }

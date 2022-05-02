@@ -3,7 +3,6 @@ import FormValidator from './FormValidator.js';
 
 const overlayForProfile = document.querySelector('.overlay_for_profile'),
   profileInfoBtn = document.querySelector('.profile-info__btn'),
-  forms = document.querySelectorAll('.form'),
   modalFormCloseAll = document.querySelectorAll('.modal-form__close'),
   formForProfile = document.querySelector('.form_for_profile'),
   formNameForProfile = document.querySelector('.form__name_for_profile'),
@@ -22,45 +21,62 @@ const overlayForView = document.querySelector('.overlay_for_view');
 
 const overlayVisible = 'overlay_visible';
 
+const modals = document.querySelectorAll('.overlay');
+
+const forms = document.querySelectorAll('.form'),
+  formForValidation = {};
+
 const classCollection = {
   inputSelector: '.form__input',
   submitButtonSelector: '.form__btn-submit',
   inactiveButtonClass: 'form__btn-submit_disabled',
-  errorClass: '-error',
+  errorId: '-error',
   inputStyleError: 'border-invalid',
-  errorClass: 'form__text-error'
+  errorClass: '.form__text-error'
 };
 
 const cardsData = [{
-  name: 'Архыз',
-  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-},
-{
-  name: 'Челябинская область',
-  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-},
-{
-  name: 'Иваново',
-  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-},
-{
-  name: 'Камчатка',
-  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-},
-{
-  name: 'Холмогорский район',
-  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-},
-{
-  name: 'Байкал',
-  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-}
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
 ];
 
 
+function listenerClose(evt) {
+  if (evt.target.classList.contains(overlayVisible)) {
+    closeModal(evt.target);
+  }
+  if (evt.target.classList.contains('modal-form__close')) {
+    closeModal(evt.target.closest('.overlay'));
+  }
+}
+
 function deleteListenerClose() {
   document.removeEventListener('keydown', closeModalOnEsc);
-  document.removeEventListener('mousedown', closeModalOnOverlay);
+  // document.removeEventListener('mousedown', closeModalOnOverlay);
+  modals.forEach(modal => {
+    modal.removeEventListener('mousedown', listenerClose)
+  });
 }
 
 // Закрытие любого модального окна
@@ -76,15 +92,11 @@ function closeModalOnEsc(evt) {
   }
 }
 
-function closeModalOnOverlay(evt) {
-  if (evt.target.classList.contains(overlayVisible)) {
-    closeModal(evt.target);
-  }
-}
-
 function setListenerClose() {
   document.addEventListener('keydown', closeModalOnEsc);
-  document.addEventListener('mousedown', closeModalOnOverlay);
+  modals.forEach(modal => {
+    modal.addEventListener('mousedown', listenerClose)
+  });
 }
 
 // Открытие любого модального окна
@@ -101,10 +113,10 @@ function resetForm(target) {
 function openEditProfile() {
   formNameForProfile.value = profileInfoName.textContent;
   formDataForProfile.value = profileInfoDiscription.textContent;
-  resetError();    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  formForValidation.editForm.resetError();
   openModal(overlayForProfile);
 
-//немного костылей для кнопки
+  //немного костылей для кнопки
   const evt = new Event('input');
   formNameForProfile.dispatchEvent(evt);
   formDataForProfile.dispatchEvent(evt);
@@ -117,18 +129,12 @@ function saveData(evt) {
   closeModal(evt.target.closest('.overlay'));
 }
 
-function inactiveButton(form) {
-  const targetButton = form.querySelector('.form__btn-submit');
-  targetButton.setAttribute("disabled", true);
-  targetButton.classList.add('form__btn-submit_disabled');
-}
-
 // Форма добавления контента
 function openAddCard() {
   openModal(overlayForAddCard);
-  resetError();                     !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   resetForm(formForAddCard);
-  inactiveButton(formForAddCard);
+  formForValidation.addForm.resetError();
+  formForValidation.addForm.inactiveButton();
 }
 
 function handleCardClick(name, link) {
@@ -138,10 +144,13 @@ function handleCardClick(name, link) {
   openModal(overlayForView);
 }
 
+function createCard(cardData) {
+  return new Card(cardData, handleCardClick, '.sample-card');
+}
+
 // Добавление карточки в дом
 function addCard(cardData) {
-  const cardItem = new Card(cardData, handleCardClick, '.sample-card');
-  cards.prepend(cardItem.getCard());
+  cards.prepend(createCard(cardData).getCard());
 }
 
 // Отправка контента на страницу
@@ -159,19 +168,11 @@ profileAddBtn.addEventListener('click', openAddCard);
 formForProfile.addEventListener('submit', saveData);
 formForAddCard.addEventListener('submit', addNewCard);
 
-
-modalFormCloseAll.forEach((btnClose) => {
-  btnClose.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains('modal-form__close')) {
-      closeModal(evt.target.closest('.overlay'));
-    }
-  });
-});
-
-// подключение валидации формам
 forms.forEach(form => {
-  const validation = new FormValidator(classCollection, form);
-  validation.enableValidation();
+  const validator = new FormValidator(classCollection, form);
+  const formName = form.getAttribute('name');
+  formForValidation[formName] = validator;
+  validator.enableValidation();
 });
 
 // Отрисовка сохранённых карточек
