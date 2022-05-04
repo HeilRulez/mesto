@@ -90,7 +90,7 @@ export default class FormValidator {
     this._setEventListeners();
   }
 
-  resetError() {
+  resetValidation() {
     this._setButtonState();
     this._messagesError.forEach(item => item.textContent = '');
     this._inputList.forEach(input => {

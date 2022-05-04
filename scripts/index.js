@@ -16,7 +16,9 @@ const overlayForAddCard = document.querySelector('.overlay_for_addCard'),
   formDataForAddCard = document.querySelector('.form__data_for_addCard'),
   cards = document.querySelector('.cards');
 
-const overlayForView = document.querySelector('.overlay_for_view');
+const overlayForView = document.querySelector('.overlay_for_view'),
+  modalFormViewImg = document.querySelector('.modal-form__view-img'),
+  modalFormTitleForView = document.querySelector('.modal-form__title_for_view');
 
 const overlayVisible = 'overlay_visible';
 
@@ -111,13 +113,15 @@ function resetForm(target) {
 function openEditProfile() {
   formNameForProfile.value = profileInfoName.textContent;
   formDataForProfile.value = profileInfoDiscription.textContent;
-  formForValidation.editForm.resetError();
+  formForValidation.editForm.resetValidation();
   openModal(overlayForProfile);
 
   //немного костылей для кнопки
-  const evt = new Event('input');
-  formNameForProfile.dispatchEvent(evt);
-  formDataForProfile.dispatchEvent(evt);
+  // Если окно с данными закрыть и ошибкой (кнопка не активна),
+  // при при открытии кнопка будет не активной, при отсутствии ошибок.
+  // const evt = new Event('input');
+  // formNameForProfile.dispatchEvent(evt);
+  // formDataForProfile.dispatchEvent(evt);
 }
 
 // Отправка данных профиля из формы на страницу
@@ -131,13 +135,13 @@ function saveData(evt) {
 function openAddCard() {
   openModal(overlayForAddCard);
   resetForm(formForAddCard);
-  formForValidation.addForm.resetError();
+  formForValidation.addForm.resetValidation();
 }
 
 function handleCardClick(name, link) {
-  this._modalFormViewImg.src = link;
-  this._modalFormViewImg.alt = name;
-  this._modalFormTitleForView.textContent = name;
+  modalFormViewImg.src = link;
+  modalFormViewImg.alt = name;
+  modalFormTitleForView.textContent = name;
   openModal(overlayForView);
 }
 
