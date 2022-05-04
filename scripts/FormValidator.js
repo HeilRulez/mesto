@@ -5,7 +5,6 @@ export default class FormValidator {
     this._btnSubmit = this._form.querySelector(this._obj.submitButtonSelector);
     this._inputList = Array.from(this._form.querySelectorAll(this._obj.inputSelector));
     this._messagesError = Array.from(this._form.querySelectorAll(this._obj.errorClass));
-    this._evt = new Event('input');
   }
 
   _ERRORS = {
@@ -99,7 +98,6 @@ _ff() {
     this._setButtonState();
     this._messagesError.forEach(item => item.textContent = '');
     this._inputList.forEach(input => {
-      input.dispatchEvent(this._evt);
       if (input.classList.contains(this._obj.inputStyleError)) {
         input.classList.remove(this._obj.inputStyleError);
       }
