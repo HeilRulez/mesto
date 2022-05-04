@@ -90,17 +90,14 @@ export default class FormValidator {
     this._setEventListeners();
   }
 
-_ff() {
-  _checkInputValidity(input);
-}
-
   resetValidation() {
-    this._setButtonState();
     this._messagesError.forEach(item => item.textContent = '');
     this._inputList.forEach(input => {
+      this._checkInputValidity(input);
       if (input.classList.contains(this._obj.inputStyleError)) {
         input.classList.remove(this._obj.inputStyleError);
       }
     });
+    this._setButtonState();
   }
 }
