@@ -2,9 +2,8 @@ export default class Card {
   constructor(data, handleCardClick, template) {
     this._cardData = data;
     this._handleCardClick = handleCardClick;
-    this._template = template;
     this._cardCopy = document
-      .querySelector(this._template)
+      .querySelector(template)
       .content
       .querySelector('.card')
       .cloneNode(true);
@@ -12,8 +11,8 @@ export default class Card {
     this._cardDel = this._cardCopy.querySelector('.card__del');
     this._cardLike = this._cardCopy.querySelector('.card__like');
     this._cardTitle = this._cardCopy.querySelector('.card__title');
-    this._modalFormViewImg = document.querySelector('.modal-form__view-img');
-    this._modalFormTitleForView = document.querySelector('.modal-form__title_for_view');
+    this._modalFormViewImg = document.querySelector('.modal-form__view-img'); // Для handleCardClick function
+    this._modalFormTitleForView = document.querySelector('.modal-form__title_for_view'); // Для handleCardClick function
   }
 
 

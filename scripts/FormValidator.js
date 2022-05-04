@@ -74,7 +74,7 @@ export default class FormValidator {
     errorElement.textContent = input.validationMessage;
   }
 
-  _trackInput(evt){
+  _trackInput(evt) {
     const input = evt.target;
     this._insertErrorText(input);
     this._setButtonState();
@@ -98,10 +98,5 @@ export default class FormValidator {
         input.classList.remove(this._obj.inputStyleError);
       }
     });
-  }
-
-  inactiveButton() {
-    this._btnSubmit.setAttribute("disabled", true);
-    this._btnSubmit.classList.add(this._obj.inactiveButtonClass);
   }
 }

@@ -3,7 +3,6 @@ import FormValidator from './FormValidator.js';
 
 const overlayForProfile = document.querySelector('.overlay_for_profile'),
   profileInfoBtn = document.querySelector('.profile-info__btn'),
-  modalFormCloseAll = document.querySelectorAll('.modal-form__close'),
   formForProfile = document.querySelector('.form_for_profile'),
   formNameForProfile = document.querySelector('.form__name_for_profile'),
   formDataForProfile = document.querySelector('.form__data_for_profile'),
@@ -62,7 +61,7 @@ const cardsData = [{
 ];
 
 
-function listenerClose(evt) {
+function handleModalClose(evt) {
   if (evt.target.classList.contains(overlayVisible)) {
     closeModal(evt.target);
   }
@@ -71,18 +70,14 @@ function listenerClose(evt) {
   }
 }
 
-function deleteListenerClose() {
+function deleteListenerEsc() {
   document.removeEventListener('keydown', closeModalOnEsc);
-  // document.removeEventListener('mousedown', closeModalOnOverlay);
-  modals.forEach(modal => {
-    modal.removeEventListener('mousedown', listenerClose)
-  });
 }
 
 // Закрытие любого модального окна
 function closeModal(modal) {
   modal.classList.remove(overlayVisible);
-  deleteListenerClose();
+  deleteListenerEsc();
 }
 
 function closeModalOnEsc(evt) {
@@ -92,17 +87,20 @@ function closeModalOnEsc(evt) {
   }
 }
 
-function setListenerClose() {
+function setListenerEsc() {
   document.addEventListener('keydown', closeModalOnEsc);
+}
+
+function setListenerClose() {
   modals.forEach(modal => {
-    modal.addEventListener('mousedown', listenerClose)
+    modal.addEventListener('mousedown', handleModalClose)
   });
 }
 
 // Открытие любого модального окна
 function openModal(modal) {
   modal.classList.add(overlayVisible);
-  setListenerClose();
+  setListenerEsc();
 }
 
 function resetForm(target) {
@@ -134,7 +132,6 @@ function openAddCard() {
   openModal(overlayForAddCard);
   resetForm(formForAddCard);
   formForValidation.addForm.resetError();
-  formForValidation.addForm.inactiveButton();
 }
 
 function handleCardClick(name, link) {
@@ -174,6 +171,8 @@ forms.forEach(form => {
   formForValidation[formName] = validator;
   validator.enableValidation();
 });
+
+setListenerClose();
 
 // Отрисовка сохранённых карточек
 cardsData.forEach(addCard);
