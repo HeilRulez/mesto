@@ -115,13 +115,6 @@ function openEditProfile() {
   formDataForProfile.value = profileInfoDiscription.textContent;
   formForValidation.editForm.resetValidation();
   openModal(overlayForProfile);
-
-  //немного костылей для кнопки
-  // Если окно с данными закрыть и ошибкой (кнопка не активна),
-  // при при открытии кнопка будет не активной, при отсутствии ошибок.
-  // const evt = new Event('input');
-  // formNameForProfile.dispatchEvent(evt);
-  // formDataForProfile.dispatchEvent(evt);
 }
 
 // Отправка данных профиля из формы на страницу
