@@ -14,8 +14,9 @@ export default class UserInfo {
     };
   }
 
-  setUserInfo({name, discription}) {
-    this._name.textContent = name;
-    this._discription.textContent = discription;
+  setUserInfo({nameProfile, descriptionProfile}) {
+    console.log({nameProfile, descriptionProfile});
+    this._name.textContent = nameProfile;
+    this._discription.textContent = descriptionProfile;
   }
 }

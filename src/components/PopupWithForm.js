@@ -22,6 +22,6 @@ export default class PopupWithForm extends Popup {
 
   setEventListeners() {
     this._modal.addEventListener('mousedown', this._handleModalClose.bind(this));
-    this._form.addEventListener('submit', this._submit(this._inputData));
+    this._form.addEventListener('submit', () => this._submit(this._inputData));
   }
 }

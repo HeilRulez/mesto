@@ -6,12 +6,12 @@ export default class Popup {
 
   open() {
     this._modal.classList.add(this._overlayVisible);
-    _setListenerEsc();
+    this._setListenerEsc();
   }
 
   close() {
     this._modal.classList.remove(this._overlayVisible);
-    _deleteListenerEsc();
+    this._deleteListenerEsc();
   }
 
   _handleEscClose(evt) {
