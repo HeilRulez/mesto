@@ -38,7 +38,7 @@ const overlayForProfile = '.overlay_for_profile';
 const profileInfoBtn = document.querySelector('.profile-info__btn');
 const profileAddBtn = document.querySelector('.profile__add-btn');
 
-const modalImage = new PopupWithImage(overlayForView).handleCardClick;
+const modalImage = new PopupWithImage(overlayForView);
 
 function createCard(cardData) {
   return new Card(cardData, modalImage, '.sample-card').getCard();
@@ -46,26 +46,15 @@ function createCard(cardData) {
 
 const cards = new Section({items: cardsData, renderer: createCard}, cardsContainer);
 
-
-function addNewCard() {
-  return cards.addItem(createCard(cardData));
-}
-
-const formImage = new PopupWithForm(overlayForAddCard, addNewCard);
-
+const formImage = new PopupWithForm(overlayForAddCard, () => cards.addItem(createCard));
 
 
 const userData = {
   nameSelector: '.profile-info__name',
   discriptionSelector: '.profile-info__discription'
 };
-
 const userInfo = new UserInfo(userData).setUserInfo;
-
 const formProfile = new PopupWithForm(overlayForProfile, userInfo);
-
-
-
 
 const forms = document.querySelectorAll('.form'),
   formForValidation = {};

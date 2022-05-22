@@ -9,13 +9,11 @@ export default class PopupWithImage extends Popup {
 
   open(name, link) {
     this._modal.classList.add(this._overlayVisible);
-    _setListenerEsc();
+    this._setListenerEsc();
+    this.setEventListeners();
     this._modalFormViewImg.src = link;
     this._modalFormViewImg.alt = name;
     this._modalFormTitleForView.textContent = name;
   }
 
-  handleCardClick(name, link) {
-    open(name, link);
-  }
 }

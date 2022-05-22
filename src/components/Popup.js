@@ -7,6 +7,7 @@ export default class Popup {
   open() {
     this._modal.classList.add(this._overlayVisible);
     this._setListenerEsc();
+    this.setEventListeners();
   }
 
   close() {
