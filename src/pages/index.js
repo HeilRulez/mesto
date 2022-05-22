@@ -5,30 +5,33 @@ import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 
+const formNameForProfile = document.querySelector('.form__name_for_profile'),
+  formDataForProfile = document.querySelector('.form__data_for_profile');
+
 const cardsData = [{
-  name: 'Архыз',
-  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-},
-{
-  name: 'Челябинская область',
-  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-},
-{
-  name: 'Иваново',
-  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-},
-{
-  name: 'Камчатка',
-  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-},
-{
-  name: 'Холмогорский район',
-  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-},
-{
-  name: 'Байкал',
-  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-}
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
 ];
 
 const cardsContainer = '.cards';
@@ -44,17 +47,19 @@ function createCard(cardData) {
   return new Card(cardData, modalImage, '.sample-card').getCard();
 }
 
-const cards = new Section({items: cardsData, renderer: createCard}, cardsContainer);
+const cards = new Section({
+  items: cardsData,
+  renderer: createCard
+}, cardsContainer);
 
 const formImage = new PopupWithForm(overlayForAddCard, () => cards.addItem(createCard));
 
-
 const userData = {
   nameSelector: '.profile-info__name',
-  discriptionSelector: '.profile-info__discription'
+  descriptionSelector: '.profile-info__description'
 };
-const userInfo = new UserInfo(userData).setUserInfo;
-const formProfile = new PopupWithForm(overlayForProfile, userInfo);
+const userInfo = new UserInfo(userData);
+const formProfile = new PopupWithForm(overlayForProfile, userInfo.setUserInfo);
 
 const forms = document.querySelectorAll('.form'),
   formForValidation = {};
@@ -68,7 +73,14 @@ const classCollection = {
   errorClass: '.form__text-error'
 };
 
+function setValueProfile() {
+  const data = userInfo.getUserInfo();
+  formNameForProfile.value = data.name;
+  formDataForProfile.value = data.description;
+}
+
 function openEditProfile() {
+  setValueProfile();
   formProfile.open();
   formForValidation.editForm.resetValidation();
 }
