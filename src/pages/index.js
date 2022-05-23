@@ -5,9 +5,6 @@ import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 
-const formNameForProfile = document.querySelector('.form__name_for_profile'),
-  formDataForProfile = document.querySelector('.form__data_for_profile');
-
 const cardsData = [{
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -34,14 +31,16 @@ const cardsData = [{
   }
 ];
 
-const cardsContainer = '.cards';
-const overlayForView = '.overlay_for_view';
-const overlayForAddCard = '.overlay_for_addCard';
-const overlayForProfile = '.overlay_for_profile';
-const profileInfoBtn = document.querySelector('.profile-info__btn');
-const profileAddBtn = document.querySelector('.profile__add-btn');
 
-const modalImage = new PopupWithImage(overlayForView);
+const formNameForProfile = document.querySelector('.form__name_for_profile'),
+  formDataForProfile = document.querySelector('.form__data_for_profile'),
+  cardsContainer = '.cards',
+  overlayForView = '.overlay_for_view',
+  overlayForAddCard = '.overlay_for_addCard',
+  overlayForProfile = '.overlay_for_profile',
+  profileInfoBtn = document.querySelector('.profile-info__btn'),
+  profileAddBtn = document.querySelector('.profile__add-btn'),
+  modalImage = new PopupWithImage(overlayForView);
 
 function createCard(cardData) {
   return new Card(cardData, modalImage, '.sample-card').getCard();
@@ -52,14 +51,14 @@ const cards = new Section({
   renderer: createCard
 }, cardsContainer);
 
-const formImage = new PopupWithForm(overlayForAddCard, () => cards.addItem(createCard));
+const formImage = new PopupWithForm(overlayForAddCard, (item) => cards.addItem(createCard(item)));
 
 const userData = {
   nameSelector: 'profile-info__name',
   descriptionSelector: 'profile-info__description'
 };
 const userInfo = new UserInfo(userData);
-const formProfile = new PopupWithForm(overlayForProfile, userInfo.setUserInfo);
+const formProfile = new PopupWithForm(overlayForProfile, (item) => userInfo.setUserInfo(item));
 
 const forms = document.querySelectorAll('.form'),
   formForValidation = {};
