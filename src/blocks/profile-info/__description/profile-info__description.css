@@ -1,4 +1,4 @@
-.profile-info__discription {
+.profile-info__description{
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -12,7 +12,7 @@
 }
 
 @media screen and (min-width: 425px) {
-  .profile-info__discription {
+  .profile-info__description {
     font-size: 18px;
     line-height: 22px;
     margin: 12px auto 0;
@@ -21,20 +21,20 @@
 }
 
 @media screen and (min-width: 750px) {
-  .profile-info__discription {
+  .profile-info__description {
     margin: 8px 0 0;
     max-width: 330px;
   }
 }
 
 @media screen and (min-width: 800px) {
-  .profile-info__discription {
+  .profile-info__description {
     max-width: 400px;
   }
 }
 
 @media screen and (min-width: 900px) {
-  .profile-info__discription {
+  .profile-info__description {
     max-width: 500px;
   }
 }

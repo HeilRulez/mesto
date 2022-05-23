@@ -55,8 +55,8 @@ const cards = new Section({
 const formImage = new PopupWithForm(overlayForAddCard, () => cards.addItem(createCard));
 
 const userData = {
-  nameSelector: '.profile-info__name',
-  descriptionSelector: '.profile-info__description'
+  nameSelector: 'profile-info__name',
+  descriptionSelector: 'profile-info__description'
 };
 const userInfo = new UserInfo(userData);
 const formProfile = new PopupWithForm(overlayForProfile, userInfo.setUserInfo);
@@ -101,3 +101,5 @@ forms.forEach(form => {
 });
 
 cards.renderAll();
+formProfile.setEventListeners();
+formImage.setEventListeners();
