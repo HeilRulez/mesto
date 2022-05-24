@@ -8,9 +8,7 @@ export default class PopupWithImage extends Popup {
   }
 
   open(name, link) {
-    this._modal.classList.add(this._overlayVisible);
-    this._setListenerEsc();
-    this.setEventListeners();
+    super.open();
     this._modalFormViewImg.src = link;
     this._modalFormViewImg.alt = name;
     this._modalFormTitleForView.textContent = name;

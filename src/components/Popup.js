@@ -2,6 +2,7 @@ export default class Popup {
   constructor(selector) {
     this._modal = document.querySelector(selector);
     this._overlayVisible = 'overlay_visible';
+    this._handleEscClose = this._handleEscClose.bind(this);
   }
 
   open() {
@@ -21,11 +22,11 @@ export default class Popup {
   }
 
   _deleteListenerEsc() {
-    document.removeEventListener('keydown', this._handleEscClose.bind(this));
+    document.removeEventListener('keydown', this._handleEscClose);
   }
 
   _setListenerEsc() {
-    document.addEventListener('keydown', this._handleEscClose.bind(this));
+    document.addEventListener('keydown', this._handleEscClose);
   }
 
   _handleModalClose(evt) {

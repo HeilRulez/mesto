@@ -16,13 +16,12 @@ export default class PopupWithForm extends Popup {
   }
 
   close() {
-    this._modal.classList.remove(this._overlayVisible);
+    super.close();
     this._form.reset();
-    this._deleteListenerEsc();
   }
 
   setEventListeners() {
-    this._modal.addEventListener('mousedown', this._handleModalClose.bind(this));
+    super.setEventListeners();
     this._form.addEventListener('submit', () => {
       this._submit(this._getInputValues());
       this.close();

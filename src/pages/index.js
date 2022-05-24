@@ -44,13 +44,10 @@ const formNameForProfile = document.querySelector('.form__name_for_profile'),
   modalImage = new PopupWithImage(overlayForView);
 
 function createCard(cardData) {
-  return new Card(cardData, modalImage, '.sample-card').getCard();
+  return new Card(cardData, (name, link) => modalImage.open(name, link), '.sample-card').getCard();
 }
 
-const cards = new Section({
-  items: cardsData,
-  renderer: createCard
-}, cardsContainer);
+const cards = new Section({items: null, renderer: createCard}, cardsContainer);
 
 const formImage = new PopupWithForm(overlayForAddCard, (item) => cards.addItem(createCard(item)));
 
@@ -100,6 +97,7 @@ forms.forEach(form => {
   validator.enableValidation();
 });
 
-cards.renderAll();
+cards.renderAll(cardsData);
 formProfile.setEventListeners();
 formImage.setEventListeners();
+modalImage.setEventListeners();
