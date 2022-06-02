@@ -21,13 +21,13 @@
 
     <main>
       <section class="profile">
-        <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Фото профиля">
+        <img class="profile__avatar" src="https://sbis.perm.ru/wp-content/uploads/2019/09/placeholder.png" alt="Фото профиля">
         <div class="profile-info">
           <div class="profile-info__conteiner">
-            <h1 class="profile-info__name">Жак-Ив Кусто</h1>
+            <h1 class="profile-info__name"></h1>
             <button class="profile-info__btn" type="button"></button>
           </div>
-          <p class="profile-info__description">Исследователь океана</p>
+          <p class="profile-info__description"></p>
         </div>
         <button class="profile__add-btn" type="button"></button>
       </section>
@@ -45,9 +45,9 @@
         <button class="modal-form__close" type="button"></button>
         <h2 class="modal-form__title">Редактировать профиль</h2>
         <form class="form form_for_profile" name="editForm" novalidate>
-          <input class="form__name form__name_for_profile form__input" id="nameInput" type="text" name="nameProfile" minlength="2" maxlength="40" required autocomplete="off">
+          <input class="form__name form__name_for_profile form__input" id="nameInput" type="text" name="name" minlength="2" maxlength="40" required autocomplete="off">
           <span class="form__text-error" id="nameInput-error"></span>
-          <input class="form__data form__data_for_profile form__input" id="description" type="text" name="descriptionProfile" minlength="2" maxlength="200" required autocomplete="off">
+          <input class="form__data form__data_for_profile form__input" id="description" type="text" name="about" minlength="2" maxlength="200" required autocomplete="off">
           <span class="form__text-error" id="description-error"></span>
           <button class="form__btn-submit" type="submit">Сохранить</button>
         </form>
