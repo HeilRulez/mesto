@@ -68,6 +68,16 @@
       </div>
     </section>
 
+    <section class="overlay overlay_for_delCard">
+      <div class="modal-form modal-form_for_delCard">
+        <button class="modal-form__close" type="button"></button>
+        <h2 class="modal-form__title">Вы уверены?</h2>
+        <form class="form form_for_delCard" name="delCard" novalidate>
+          <button class="form__btn-submit" type="submit">Да</button>
+        </form>
+      </div>
+    </section>
+
     <section class="overlay overlay_for_view">
       <div class="modal-form modal-form_for_view">
         <div>
@@ -85,7 +95,11 @@
         <img class="card__img" src="https://sbis.perm.ru/wp-content/uploads/2019/09/placeholder.png" alt="дляТестов">
         <div class="card__description">
           <h2 class="card__title"></h2>
-          <button class="card__like " type="button"></button>
+          <div class="card__like-container">
+            <button class="card__like " type="button"></button>
+            <span class="card__like-count"></span>
+          </div>
+
         </div>
       </div>
     </template>

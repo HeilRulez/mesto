@@ -1,5 +1,6 @@
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
+import PopupDel from '../components/PopupDel.js';
 import UserInfo from '../components/UserInfo.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
@@ -14,12 +15,17 @@ const formNameForProfile = document.querySelector('.form__name_for_profile'),
   overlayForView = '.overlay_for_view',
   overlayForAddCard = '.overlay_for_addCard',
   overlayForProfile = '.overlay_for_profile',
+  overlayForDelCard = '.overlay_for_delCard',
   profileInfoBtn = document.querySelector('.profile-info__btn'),
   profileAddBtn = document.querySelector('.profile__add-btn'),
-  modalImage = new PopupWithImage(overlayForView);
+  modalImage = new PopupWithImage(overlayForView),
+  confirmDelete = new PopupDel(overlayForDelCard);
+
+let userId = '';
+
 
 function createCard(cardData) {
-  return new Card(cardData, (name, link) => modalImage.open(name, link), '.sample-card').getCard();
+  return new Card(cardData, (name, link) => modalImage.open(name, link), () => confirmDelete.open(), '.sample-card', userId).getCard();
 }
 
 const cards = new Section({items: null, renderer: createCard}, cardsContainer);
@@ -111,6 +117,7 @@ forms.forEach(form => {
 formProfile.setEventListeners();
 formImage.setEventListeners();
 modalImage.setEventListeners();
+confirmDelete.setEventListeners();
 
 
 fetch('https://mesto.nomoreparties.co/v1/cohort-42/cards', {
@@ -130,7 +137,8 @@ fetch('https://mesto.nomoreparties.co/v1/cohort-42/users/me', {
   .then(res => res.json())
   .then(userData => {
     userInfo.setUserAvatar(userData);
-    userInfo.setUserInfo(userData)
+    userInfo.setUserInfo(userData);
+    userId = userData._id;
   })
   .catch(err => console.error(`Ошибка ${err} при загрузке данных профиля.`));;
 

@@ -5,7 +5,7 @@
   background-color: rgba(0, 0, 0, 0);
   width: 22px;
   height: 19px;
-  margin: auto 0;
+  margin: 0 auto;
   cursor: pointer;
   transition: opacity .3s ease-in-out;
   transition: transform .5s;
