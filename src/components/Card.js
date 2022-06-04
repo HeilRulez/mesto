@@ -1,8 +1,9 @@
 export default class Card {
-  constructor(data, handleCardClick, handleDelete, template, author) {
+  constructor(data, {handleCardClick, handleDelete, handleLike, template, author}) {
     this._cardData = data;
     this._handleCardClick = handleCardClick;
     this._handleDelete = handleDelete;
+    this._handleLike = handleLike;
     this._author = author;
     this._cardCopy = document
       .querySelector(template)
@@ -16,14 +17,14 @@ export default class Card {
     this._cardCount = this._cardCopy.querySelector('.card__like-count');
   }
 
-  _likeCard(evt) {
-    evt.target.classList.toggle("card__like_active");
-  }
+  // _likeCard(evt) {
+  //   evt.target.classList.toggle("card__like_active");
+  // }
 
   _setEventListeners() {
     this._imgElement.addEventListener('click', () => this._handleCardClick(this._cardData.name, this._cardData.link));
     this._cardDel.addEventListener('click', () => this._handleDelete(this._cardData));
-    this._cardLike.addEventListener('click', this._likeCard);
+    this._cardLike.addEventListener('click', (evt) => this._handleLike(evt));
   }
 
   _createCard() {

@@ -40,8 +40,29 @@ function deleteCard() {
 
 const confirmDelete = new PopupDel(overlayForDelCard, deleteCard());
 
+function handleLike(evt) {
+  console.log(evt.target.closest('.card'));
+
+  // if()
+  // fetch('https://mesto.nomoreparties.co/v1/cohort-42/cards/idCard/likes', {
+  //   method: 'PUT',
+  //   headers: {
+  //     authorization: itMe,
+  //   }
+  //   })
+  //   .then(res => )
+}
+
+const objectForCard = {
+  handleCardClick: (name, link) => modalImage.open(name, link),
+  handleDelete: (card) => confirmDelete.open(card),
+  handleLike: (idCard) => handleLike(idCard),
+  template: '.sample-card',
+  author: userId,
+};
+
 function createCard(cardData) {
-  return new Card(cardData, (name, link) => modalImage.open(name, link), (card) => confirmDelete.open(card), '.sample-card', userId).getCard();
+  return new Card(cardData, objectForCard).getCard();
 }
 
 const cards = new Section({items: null, renderer: createCard}, cardsContainer);
