@@ -18,17 +18,34 @@ const formNameForProfile = document.querySelector('.form__name_for_profile'),
   overlayForDelCard = '.overlay_for_delCard',
   profileInfoBtn = document.querySelector('.profile-info__btn'),
   profileAddBtn = document.querySelector('.profile__add-btn'),
-  modalImage = new PopupWithImage(overlayForView),
-  confirmDelete = new PopupDel(overlayForDelCard);
+  modalImage = new PopupWithImage(overlayForView);
 
 let userId = '';
 
+function deleteCard() {
+  return (idCard) => {fetch(`https://mesto.nomoreparties.co/v1/cohort-42/cards/${idCard}`, {
+    method: 'DELETE',
+    headers: {
+      authorization: itMe
+    }
+  })
+  // .then(res => {
+  //   if(res.ok) {
+  //     cards.delItem(idCard)
+  //   }
+  // })
+  .catch(err => console.error(`Ошибка ${err} при удалении карточки.`));
+  }
+}
+
+const confirmDelete = new PopupDel(overlayForDelCard, deleteCard());
 
 function createCard(cardData) {
-  return new Card(cardData, (name, link) => modalImage.open(name, link), () => confirmDelete.open(), '.sample-card', userId).getCard();
+  return new Card(cardData, (name, link) => modalImage.open(name, link), (card) => confirmDelete.open(card), '.sample-card', userId).getCard();
 }
 
 const cards = new Section({items: null, renderer: createCard}, cardsContainer);
+
 
 function addCardToBase(cardData) {
   fetch('https://mesto.nomoreparties.co/v1/cohort-42/cards', {
@@ -43,8 +60,9 @@ function addCardToBase(cardData) {
     })
   })
   .then(res => res.json())
-  .then(data => cards.addItem(createCard(data)))
+  .then(data => cards.addItem(createCard(data)))  //Не одновляется DOM
   .catch(err => console.error(`Ошибка ${err} при добавлении карточки.`));
+
 }
 
 const formImage = new PopupWithForm(overlayForAddCard, (item) => addCardToBase(item));

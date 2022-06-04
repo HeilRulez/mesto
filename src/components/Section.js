@@ -9,6 +9,10 @@ export default class Section {
     this._container.append(element);
   }
 
+  delItem(element) {
+    this._container.querySelector(`#${element}`).remove();
+  }
+
   renderAll(items) {
     items.forEach(item => this.addItem(this._renderer(item)));
   }
