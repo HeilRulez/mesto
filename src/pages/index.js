@@ -23,7 +23,9 @@ const formNameForProfile = document.querySelector('.form__name_for_profile'),
 let userId = '';
 
 function deleteCard() {
-  return (idCard) => {fetch(`https://mesto.nomoreparties.co/v1/cohort-42/cards/${idCard}`, {
+  return (idCard) => {
+    console.log(idCard);
+    fetch(`https://mesto.nomoreparties.co/v1/cohort-42/cards/${idCard}`, {
     method: 'DELETE',
     headers: {
       authorization: itMe
@@ -41,28 +43,51 @@ function deleteCard() {
 const confirmDelete = new PopupDel(overlayForDelCard, deleteCard());
 
 function handleLike(evt) {
-  console.log(evt.target.closest('.card'));
+  return (card) => {
 
-  // if()
-  // fetch('https://mesto.nomoreparties.co/v1/cohort-42/cards/idCard/likes', {
-  //   method: 'PUT',
-  //   headers: {
-  //     authorization: itMe,
-  //   }
-  //   })
-  //   .then(res => )
+  if(evt.target.classList.contains('card__like_active')) {
+    fetch(`https://mesto.nomoreparties.co/v1/cohort-42/cards/${evt.target.closest('.card').id}/likes`, {
+    method: 'DELETE',
+    headers: {
+      authorization: itMe,
+    }
+    })
+    .then(res => {
+      if(res.ok) {
+        card.delLikeCard();
+        return res.json()
+      }
+    })
+    .then(data => card.countLiks(data.likes.length))
+    .catch(err => console.error(`Ошибка ${err} при снятии 'like'.`));
+  }else{
+  fetch(`https://mesto.nomoreparties.co/v1/cohort-42/cards/${evt.target.closest('.card').id}/likes`, {
+    method: 'PUT',
+    headers: {
+      authorization: itMe,
+    }
+    })
+    .then(res => {
+      if(res.ok) {
+        card.addLikeCard();
+        return res.json()
+      }
+    })
+    .then(data => card.countLiks(data.likes.length))
+    .catch(err => console.error(`Ошибка ${err} при установке 'like'.`));
+  }
+}
 }
 
 const objectForCard = {
   handleCardClick: (name, link) => modalImage.open(name, link),
   handleDelete: (card) => confirmDelete.open(card),
-  handleLike: (idCard) => handleLike(idCard),
-  template: '.sample-card',
-  author: userId,
+  handleLike: (evt) => handleLike(evt),
+  template: '.sample-card'
 };
 
 function createCard(cardData) {
-  return new Card(cardData, objectForCard).getCard();
+  return new Card(cardData, objectForCard, userId).getCard();
 }
 
 const cards = new Section({items: null, renderer: createCard}, cardsContainer);
@@ -83,7 +108,6 @@ function addCardToBase(cardData) {
   .then(res => res.json())
   .then(data => cards.addItem(createCard(data)))  //Не одновляется DOM
   .catch(err => console.error(`Ошибка ${err} при добавлении карточки.`));
-
 }
 
 const formImage = new PopupWithForm(overlayForAddCard, (item) => addCardToBase(item));

@@ -1,5 +1,5 @@
 export default class Card {
-  constructor(data, {handleCardClick, handleDelete, handleLike, template, author}) {
+  constructor(data, {handleCardClick, handleDelete, handleLike, template}, author) {
     this._cardData = data;
     this._handleCardClick = handleCardClick;
     this._handleDelete = handleDelete;
@@ -17,14 +17,34 @@ export default class Card {
     this._cardCount = this._cardCopy.querySelector('.card__like-count');
   }
 
-  // _likeCard(evt) {
-  //   evt.target.classList.toggle("card__like_active");
-  // }
+  addLikeCard() {
+    this._cardLike.classList.add("card__like_active");
+  }
+
+  delLikeCard() {
+    this._cardLike.classList.remove("card__like_active");
+  }
 
   _setEventListeners() {
     this._imgElement.addEventListener('click', () => this._handleCardClick(this._cardData.name, this._cardData.link));
     this._cardDel.addEventListener('click', () => this._handleDelete(this._cardData));
-    this._cardLike.addEventListener('click', (evt) => this._handleLike(evt));
+    this._cardLike.addEventListener('click', (evt) => this._handleLike(evt)(this));
+  }
+
+  countLiks(count) {
+    if(count === 0) {
+      this._cardCount.textContent = '';
+    }else{
+      this._cardCount.textContent = count;
+    }
+  }
+
+  containsLike() {
+    this._cardData.likes.forEach(item => {
+      if(item._id ===this._author) {
+        this.addLikeCard()
+      }
+    });
   }
 
   _createCard() {
@@ -32,11 +52,8 @@ export default class Card {
     this._imgElement.src = this._cardData.link;
     this._imgElement.alt = this._cardData.name;
     this._cardCopy.id = this._cardData._id;
-    if(this._cardData.likes.length === 0) {
-      this._cardCount.textContent = '';
-    }else{
-      this._cardCount.textContent = this._cardData.likes.length;
-    }
+    this.countLiks(this._cardData.likes.length);
+    this.containsLike();
     this._setEventListeners();
     if(this._cardData.owner._id !== this._author) {
       this._cardDel.remove();
