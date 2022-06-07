@@ -3,6 +3,8 @@ export default class Popup {
     this._modal = document.querySelector(selector);
     this._overlayVisible = 'overlay_visible';
     this._handleEscClose = this._handleEscClose.bind(this);
+    this._form = this._modal.querySelector('.form');
+    this._btn = this._modal.querySelector('.form__btn-submit');
   }
 
   open() {

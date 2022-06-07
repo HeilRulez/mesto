@@ -1,49 +1,58 @@
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
-import PopupDel from '../components/PopupDel.js';
 import UserInfo from '../components/UserInfo.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
+// import Api from '../components/Api.js';
 import './index.css';
 
 const itMe = '4a7f2ab1-6764-4429-a44f-752ab22711db';
 
 const formNameForProfile = document.querySelector('.form__name_for_profile'),
   formDataForProfile = document.querySelector('.form__data_for_profile'),
+  profileInfoBtn = document.querySelector('.profile-info__btn'),
+  profileAddBtn = document.querySelector('.profile__add-btn'),
+  profileAvatar = document.querySelector('.profile__avatar'),
   cardsContainer = '.cards',
   overlayForView = '.overlay_for_view',
   overlayForAddCard = '.overlay_for_addCard',
   overlayForProfile = '.overlay_for_profile',
   overlayForDelCard = '.overlay_for_delCard',
-  profileInfoBtn = document.querySelector('.profile-info__btn'),
-  profileAddBtn = document.querySelector('.profile__add-btn'),
+  overlayForAvatar = '.overlay_for_avatar',
   modalImage = new PopupWithImage(overlayForView);
 
 let userId = '';
 
+const cards = new Section(createCard, cardsContainer);
+
 function deleteCard() {
-  return (idCard) => {
+  return (idCard, btn) => {
+    btn.textContent = 'Удаление...';
     fetch(`https://mesto.nomoreparties.co/v1/cohort-42/cards/${idCard}`, {
     method: 'DELETE',
     headers: {
       authorization: itMe
     }
   })
-  // .then(res => {
-  //   if(res.ok) {
-  //     cards.delItem(idCard)
-  //   }
-  // })
+  .then(res => {
+    if(res.ok) {
+      confirmDelete.close();
+      btn.textContent = 'Да';
+      cards.delItem(idCard);
+      return res.json();
+    }else{
+      return new Promise.reject(`Ошибка: ${res.status}`);
+    }
+  })
   .catch(err => console.error(`Ошибка ${err} при удалении карточки.`));
   }
 }
 
-const confirmDelete = new PopupDel(overlayForDelCard, deleteCard());
+const confirmDelete = new PopupWithForm(overlayForDelCard, deleteCard());
 
 function handleLike(evt) {
   return (card) => {
-
   if(evt.target.classList.contains('card__like_active')) {
     fetch(`https://mesto.nomoreparties.co/v1/cohort-42/cards/${evt.target.closest('.card').id}/likes`, {
     method: 'DELETE',
@@ -89,10 +98,9 @@ function createCard(cardData) {
   return new Card(cardData, objectForCard, userId).getCard();
 }
 
-const cards = new Section({items: null, renderer: createCard}, cardsContainer);
 
-
-function addCardToBase(cardData) {
+function addCardToBase({name, link, btn}) {
+  btn.textContent = 'Создание...';
   fetch('https://mesto.nomoreparties.co/v1/cohort-42/cards', {
     method: 'POST',
     headers: {
@@ -100,12 +108,20 @@ function addCardToBase(cardData) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      name: cardData.name,
-      link: cardData.link
+      name: name,
+      link: link
     })
   })
-  .then(res => res.json())
-  .then(data => cards.addItem(createCard(data)))  //Не одновляется DOM
+  .then(res => {
+    if(res.ok) {
+      formImage.close();
+      btn.textContent = 'Создать';
+      return res.json()
+    }else{
+      return new Promise.reject(`Ошибка: ${res.status}`);
+    }
+  })
+  .then(data => cards.addItem(createCard(data)))
   .catch(err => console.error(`Ошибка ${err} при добавлении карточки.`));
 }
 
@@ -118,7 +134,8 @@ const userData = {
 };
 const userInfo = new UserInfo(userData);
 
-function sendData({name, about}) {
+function sendData({name, about, btn}) {
+  btn.textContent = 'Сохранение...';
   fetch('https://mesto.nomoreparties.co/v1/cohort-42/users/me', {
     method: 'PATCH',
     headers: {
@@ -130,12 +147,48 @@ function sendData({name, about}) {
       about: about
     })
   })
-  .then(res => res.json())
+  .then(res => {
+    if(res.ok) {
+      formProfile.close();
+      btn.textContent = 'Сохранить';
+      return res.json()
+    }else{
+      return new Promise.reject(`Ошибка: ${res.status}`);
+    }
+  })
   .then(data => userInfo.setUserInfo(data))
   .catch(err => console.error(`Ошибка ${err} при отправке данных профиля.`));
 }
 
+function selectionAvatar({link, btn}) {
+  btn.textContent = 'Сохранение...';
+  fetch('https://mesto.nomoreparties.co/v1/cohort-42/users/me/avatar', {
+    method: 'PATCH',
+    headers: {
+      authorization: itMe,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      avatar: link
+    })
+  })
+  .then(res => {
+    if(res.ok) {
+      formAvatar.close();
+      btn.textContent = 'Сохранить';
+      return res.json()
+    }else{
+      return new Promise.reject(`Ошибка: ${res.status}`);
+    }
+  })
+  .then(data => userInfo.setUserAvatar(data))
+  .catch(err => console.error(`Ошибка ${err} при обновлении фото проыиля.`));
+}
+
+
 const formProfile = new PopupWithForm(overlayForProfile, (item) => sendData(item));
+
+const formAvatar = new PopupWithForm(overlayForAvatar, (item) => selectionAvatar(item));
 
 const forms = document.querySelectorAll('.form'),
   formForValidation = {};
@@ -166,8 +219,14 @@ function openAddCard() {
   formForValidation.addForm.resetValidation();
 }
 
+function editAvatarForm() {
+  formAvatar.open();
+  formForValidation.avatarForm.resetValidation();
+}
+
 profileInfoBtn.addEventListener('click', openEditProfile);
 profileAddBtn.addEventListener('click', openAddCard);
+profileAvatar.addEventListener('click', editAvatarForm);
 
 forms.forEach(form => {
   const validator = new FormValidator(classCollection, form);
@@ -180,6 +239,7 @@ formProfile.setEventListeners();
 formImage.setEventListeners();
 modalImage.setEventListeners();
 confirmDelete.setEventListeners();
+formAvatar.setEventListeners();
 
 
 fetch('https://mesto.nomoreparties.co/v1/cohort-42/cards', {

@@ -8,3 +8,7 @@
   color: #FF0000;
   margin-bottom: 10px;
 }
+
+.form__text-error:last-of-type {
+  margin-bottom: -10px;
+}

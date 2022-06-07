@@ -5,13 +5,13 @@
   line-height: 22px;
   color: #000;
   padding: 0;
-  margin: 25px auto 0;
+  margin: 0 auto;
 }
 
 @media screen and (min-width: 560px) {
   .modal-form__title {
     font-size: 24px;
     line-height: 29px;
-    margin: 34px 0 0 0;
+    margin: 0;
   }
 }
