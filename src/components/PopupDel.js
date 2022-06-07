@@ -15,7 +15,7 @@ export default class PopupDel extends Popup {
 
     setEventListeners() {
       super.setEventListeners();
-      this._form.addEventListener('submit', () => {
+      this._form.addEventListener('submit', (evt) => {
         this._submit(this._idCard);
         this.close();
       });

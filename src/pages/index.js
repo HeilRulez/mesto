@@ -24,7 +24,6 @@ let userId = '';
 
 function deleteCard() {
   return (idCard) => {
-    console.log(idCard);
     fetch(`https://mesto.nomoreparties.co/v1/cohort-42/cards/${idCard}`, {
     method: 'DELETE',
     headers: {
