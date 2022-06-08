@@ -4,10 +4,8 @@ import UserInfo from '../components/UserInfo.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
-// import Api from '../components/Api.js';
+import Api from '../components/Api.js';
 import './index.css';
-
-const itMe = '4a7f2ab1-6764-4429-a44f-752ab22711db';
 
 const formNameForProfile = document.querySelector('.form__name_for_profile'),
   formDataForProfile = document.querySelector('.form__data_for_profile'),
@@ -21,6 +19,25 @@ const formNameForProfile = document.querySelector('.form__name_for_profile'),
   overlayForDelCard = '.overlay_for_delCard',
   overlayForAvatar = '.overlay_for_avatar',
   modalImage = new PopupWithImage(overlayForView);
+
+
+// const api = new Api({
+//   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-42',
+//   headers: {
+//     authorization: 'c56e30dc-2883-4270-a59e-b2f7bae969c6',
+//     'Content-Type': 'application/json'
+//   }
+// });
+// {baseUrl, token, type, cohort}
+
+const configApi = {
+  baseUrl: 'https://mesto.nomoreparties.co/v1/',
+  token: '4a7f2ab1-6764-4429-a44f-752ab22711db',
+  type: 'application/json',
+  cohort: 'cohort-42'
+}
+
+const api = new Api(configApi);
 
 let userId = '';
 
@@ -242,25 +259,31 @@ confirmDelete.setEventListeners();
 formAvatar.setEventListeners();
 
 
-fetch('https://mesto.nomoreparties.co/v1/cohort-42/cards', {
-  headers: {
-    authorization: itMe
+api.setDataUser()
+.then(res => {
+  if(res.ok) {
+    return res.json()
+  }else{
+    return new Promise.reject(`Ошибка: ${res.status}`);
   }
-  })
-  .then(res => res.json())
-  .then(data => cards.renderAll(data))
-  .catch(err => console.error(`Ошибка ${err} при загрузке карточек.`));
+})
+.then(userData => {
+  userInfo.setUserAvatar(userData);
+  userInfo.setUserInfo(userData);
+  userId = userData._id;
+})
+.catch(err => console.error(`Ошибка ${err} при загрузке данных профиля.`));
 
-fetch('https://mesto.nomoreparties.co/v1/cohort-42/users/me', {
-  headers: {
-    authorization: itMe
+
+
+api.renderAllCards()
+.then(res => {
+  if(res.ok) {
+    return res.json()
+  }else{
+    return new Promise.reject(`Ошибка: ${res.status}`);
   }
-  })
-  .then(res => res.json())
-  .then(userData => {
-    userInfo.setUserAvatar(userData);
-    userInfo.setUserInfo(userData);
-    userId = userData._id;
-  })
-  .catch(err => console.error(`Ошибка ${err} при загрузке данных профиля.`));;
+})
+.then(data => cards.renderAll(data))
+.catch(err => console.error(`Ошибка ${err} при загрузке карточек.`));
 
