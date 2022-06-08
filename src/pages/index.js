@@ -20,6 +20,7 @@ const formNameForProfile = document.querySelector('.form__name_for_profile'),
   overlayForAvatar = '.overlay_for_avatar';
 
 let userId = '';
+let idCard = '';
 
 const modalImage = new PopupWithImage(overlayForView);
 const cards = new Section(createCard, cardsContainer);
@@ -34,14 +35,14 @@ const configApi = {
 const api = new Api(configApi);
 
 function deleteCard() {
-  return (btn) => {
+  return ({btn}) => {
     btn.textContent = 'Удаление...';
     api.reqDelCard(idCard)
     .then(res => {
       if(res.ok) {
         btn.textContent = 'Да';
         confirmDelete.close();
-        cards.delItem(idCard);
+        cards.delItem(idCard);    // ошибка селектора
       }else{
         return new Promise.reject(`Ошибка: ${res.status}`);
       }
@@ -50,15 +51,16 @@ function deleteCard() {
   }
 }
 
-function m(evt) {
-  confirmDelete.open();
-}
-
 const confirmDelete = new PopupWithForm(overlayForDelCard, deleteCard());
+
+function openDelete(evt) {
+  confirmDelete.open();
+  idCard = evt.target.closest('.card').id;
+}
 
 const objectForCard = {
   handleCardClick: (name, link) => modalImage.open(name, link),
-  handleDelete: (evt) => m(evt), //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  handleDelete: (evt) => openDelete(evt),
   handleLike: (evt) => handleLike(evt),
   template: '.sample-card'
 };
@@ -79,7 +81,7 @@ function addCardToBase({name, link, btn}) {
       return new Promise.reject(`Ошибка: ${res.status}`);
     }
   })
-  .then(data => cards.addItem(createCard(data)))
+  .then(data => cards.addItem(createCard(data)))    // Не добавляет в DOM
   .catch(err => console.error(`Ошибка ${err} при добавлении карточки.`));
 }
 
@@ -118,21 +120,11 @@ const userInfo = new UserInfo(userData);
 
 function sendData({name, about, btn}) {
   btn.textContent = 'Сохранение...';
-  fetch('https://mesto.nomoreparties.co/v1/cohort-42/users/me', {
-    method: 'PATCH',
-    headers: {
-      authorization: itMe,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      name: name,
-      about: about
-    })
-  })
+  api.sendData(name, about)
   .then(res => {
     if(res.ok) {
-      formProfile.close();
       btn.textContent = 'Сохранить';
+      formProfile.close();
       return res.json()
     }else{
       return new Promise.reject(`Ошибка: ${res.status}`);
@@ -144,20 +136,11 @@ function sendData({name, about, btn}) {
 
 function selectionAvatar({link, btn}) {
   btn.textContent = 'Сохранение...';
-  fetch('https://mesto.nomoreparties.co/v1/cohort-42/users/me/avatar', {
-    method: 'PATCH',
-    headers: {
-      authorization: itMe,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      avatar: link
-    })
-  })
+  api.selectionAvatar(link)
   .then(res => {
     if(res.ok) {
-      formAvatar.close();
       btn.textContent = 'Сохранить';
+      formAvatar.close();
       return res.json()
     }else{
       return new Promise.reject(`Ошибка: ${res.status}`);
@@ -167,15 +150,9 @@ function selectionAvatar({link, btn}) {
   .catch(err => console.error(`Ошибка ${err} при обновлении фото проыиля.`));
 }
 
-
 const formProfile = new PopupWithForm(overlayForProfile, (item) => sendData(item));
 
 const formAvatar = new PopupWithForm(overlayForAvatar, (item) => selectionAvatar(item));
-
-const forms = document.querySelectorAll('.form'),
-  formForValidation = {};
-
-
 
 function setValueProfile() {
   const data = userInfo.getUserInfo();
@@ -213,6 +190,10 @@ const classCollection = {
   errorClass: '.form__text-error'
 };
 
+
+const forms = document.querySelectorAll('.form'),
+  formForValidation = {};
+
 forms.forEach(form => {
   const validator = new FormValidator(classCollection, form);
   const formName = form.getAttribute('name');
@@ -225,7 +206,6 @@ formImage.setEventListeners();
 modalImage.setEventListeners();
 confirmDelete.setEventListeners();
 formAvatar.setEventListeners();
-
 
 api.setDataUser()
 .then(res => {
@@ -241,8 +221,6 @@ api.setDataUser()
   userId = userData._id;
 })
 .catch(err => console.error(`Ошибка ${err} при загрузке данных профиля.`));
-
-
 
 api.renderAllCards()
 .then(res => {

@@ -1,10 +1,5 @@
 export default class Api {
-  constructor({
-    baseUrl,
-    token,
-    type,
-    cohort
-  }) {
+  constructor({baseUrl, token, type, cohort}) {
     this._baseUrl = baseUrl;
     this._token = token;
     this._type = type;
@@ -70,6 +65,33 @@ export default class Api {
         }
       })
     }
+  }
+
+  sendData(name, about) {
+    return fetch(`${this._baseUrl}${this._cohort}/users/me`, {
+      method: 'PATCH',
+      headers: {
+        authorization: this._token,
+        'Content-Type': this._type
+      },
+      body: JSON.stringify({
+        name: name,
+        about: about
+      })
+    })
+  }
+
+  selectionAvatar(link) {
+    return fetch(`${this._baseUrl}${this._cohort}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: {
+        authorization: this._token,
+        'Content-Type': this._type
+      },
+      body: JSON.stringify({
+        avatar: link
+      })
+    })
   }
 
 }
