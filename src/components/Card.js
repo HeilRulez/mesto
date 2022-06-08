@@ -27,7 +27,7 @@ export default class Card {
 
   _setEventListeners() {
     this._imgElement.addEventListener('click', () => this._handleCardClick(this._cardData.name, this._cardData.link));
-    this._cardDel.addEventListener('click', () => this._handleDelete(this._cardData));
+    this._cardDel.addEventListener('click', (evt) => this._handleDelete(evt)(this));
     this._cardLike.addEventListener('click', (evt) => this._handleLike(evt)(this));
   }
 
@@ -41,7 +41,7 @@ export default class Card {
 
   containsLike() {
     this._cardData.likes.forEach(item => {
-      if(item._id ===this._author) {
+      if(item._id === this._author) {
         this.addLikeCard()
       }
     });
