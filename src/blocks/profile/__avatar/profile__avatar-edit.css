@@ -8,7 +8,7 @@
     }
 }
 
-.profile__avatar_edit {
+.profile__avatar-edit {
     position: absolute;
     top: -3px;
     left: -3px;
@@ -20,7 +20,7 @@
     transition: opacity .3s ease-in-out;
 }
 
-.profile__avatar_edit:hover::before {
+.profile__avatar-edit:hover::before {
     content: url(../../../../images/avatar.png);
     animation: opacity .3s ease-in-out;
     position: absolute;
@@ -29,6 +29,6 @@
 
 }
 
-.profile__avatar_edit:hover {
+.profile__avatar-edit:hover {
     opacity: 1;
 }
