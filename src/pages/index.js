@@ -20,7 +20,7 @@ const formNameForProfile = document.querySelector('.form__name_for_profile'),
   overlayForAvatar = '.overlay_for_avatar';
 
 let userId = '';
-let idCard = '';
+let delCard = '';
 
 const modalImage = new PopupWithImage(overlayForView);
 const cards = new Section(createCard, cardsContainer);
@@ -37,12 +37,12 @@ const api = new Api(configApi);
 function deleteCard() {
   return ({btn}) => {
     btn.textContent = 'Удаление...';
-    api.reqDelCard(idCard)
+    api.reqDelCard(delCard.id)
     .then(res => {
+      btn.textContent = 'Да';
       if(res.ok) {
-        btn.textContent = 'Да';
         confirmDelete.close();
-        cards.delItem(idCard);    // ошибка селектора
+        cards.delItem(delCard);
       }else{
         return new Promise.reject(`Ошибка: ${res.status}`);
       }
@@ -55,7 +55,7 @@ const confirmDelete = new PopupWithForm(overlayForDelCard, deleteCard());
 
 function openDelete(evt) {
   confirmDelete.open();
-  idCard = evt.target.closest('.card').id;
+  delCard = evt.target.closest('.card');
 }
 
 const objectForCard = {
@@ -73,15 +73,15 @@ function addCardToBase({name, link, btn}) {
   btn.textContent = 'Создание...';
   api.getAllCards({name, link})
   .then(res => {
+    btn.textContent = 'Создать';
     if(res.ok) {
-      btn.textContent = 'Создать';
       formImage.close();
       return res.json()
     }else{
       return new Promise.reject(`Ошибка: ${res.status}`);
     }
   })
-  .then(data => cards.addItem(createCard(data)))    // Не добавляет в DOM
+  .then(data => cards.addItem(createCard(data), true))
   .catch(err => console.error(`Ошибка ${err} при добавлении карточки.`));
 }
 
@@ -122,8 +122,8 @@ function sendData({name, about, btn}) {
   btn.textContent = 'Сохранение...';
   api.sendData(name, about)
   .then(res => {
+    btn.textContent = 'Сохранить';
     if(res.ok) {
-      btn.textContent = 'Сохранить';
       formProfile.close();
       return res.json()
     }else{
@@ -138,8 +138,8 @@ function selectionAvatar({link, btn}) {
   btn.textContent = 'Сохранение...';
   api.selectionAvatar(link)
   .then(res => {
+    btn.textContent = 'Сохранить';
     if(res.ok) {
-      btn.textContent = 'Сохранить';
       formAvatar.close();
       return res.json()
     }else{
@@ -147,7 +147,7 @@ function selectionAvatar({link, btn}) {
     }
   })
   .then(data => userInfo.setUserAvatar(data))
-  .catch(err => console.error(`Ошибка ${err} при обновлении фото проыиля.`));
+  .catch(err => console.error(`Ошибка ${err} при обновлении фото профиля.`));
 }
 
 const formProfile = new PopupWithForm(overlayForProfile, (item) => sendData(item));

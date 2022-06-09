@@ -4,12 +4,16 @@ export default class Section {
     this._container = document.querySelector(containerSelector);
   }
 
-  addItem(element) {
-    this._container.append(element);
+  addItem(element, addCard = null) {
+    if(addCard) {
+      this._container.prepend(element)
+    }else{
+      this._container.append(element)
+    }
   }
 
   delItem(element) {
-    this._container.querySelector(`#${element}`).remove();
+    element.remove();
   }
 
   renderAll(items) {
