@@ -21,7 +21,7 @@
 }
 
 .profile__avatar-edit:hover::before {
-    content: url(../../../../images/avatar.png);
+    content: url(../../../images/avatar.png);
     animation: opacity .3s ease-in-out;
     position: absolute;
     top: calc(50% - 13px);
