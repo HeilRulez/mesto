@@ -12,10 +12,6 @@ export default class Section {
     }
   }
 
-  delItem(element) {
-    element.remove();
-  }
-
   renderAll(items) {
     items.forEach(item => this.addItem(this._renderer(item)));
   }
