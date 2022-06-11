@@ -32,11 +32,7 @@ export default class Card {
   }
 
   countLiks(count) {
-    if(count === 0) {
-      this._cardCount.textContent = '';
-    }else{
       this._cardCount.textContent = count;
-    }
   }
 
   containsLike() {

@@ -137,16 +137,11 @@ function sendData({name, about, btn}) {
 function selectionAvatar({link, btn}) {
   btn.textContent = 'Сохранение...';
   api.selectionAvatar(link)
-  .then(res => {
+  .then(data => {
     btn.textContent = 'Сохранить';
-    if(res.ok) {
-      formAvatar.close();
-      return res.json()
-    }else{
-      return new Promise.reject(`Ошибка: ${res.status}`);
-    }
+    formAvatar.close();
+    userInfo.setUserAvatar(data)
   })
-  .then(data => userInfo.setUserAvatar(data))
   .catch(err => console.error(`Ошибка ${err} при обновлении фото профиля.`));
 }
 
@@ -208,13 +203,6 @@ confirmDelete.setEventListeners();
 formAvatar.setEventListeners();
 
 api.setDataUser()
-.then(res => {
-  if(res.ok) {
-    return res.json()
-  }else{
-    return new Promise.reject(`Ошибка: ${res.status}`);
-  }
-})
 .then(userData => {
   userInfo.setUserAvatar(userData);
   userInfo.setUserInfo(userData);
@@ -223,13 +211,6 @@ api.setDataUser()
 .catch(err => console.error(`Ошибка ${err} при загрузке данных профиля.`));
 
 api.renderAllCards()
-.then(res => {
-  if(res.ok) {
-    return res.json()
-  }else{
-    return new Promise.reject(`Ошибка: ${res.status}`);
-  }
-})
 .then(data => cards.renderAll(data))
 .catch(err => console.error(`Ошибка ${err} при загрузке карточек.`));
 

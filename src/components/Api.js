@@ -6,21 +6,30 @@ export default class Api {
     this._cohort = cohort;
   }
 
+  _checkResponse(res) {
+    if(res.ok) {
+      return res.json()
+    }else{
+      return new Promise.reject(`Ошибка: ${res.status}`);
+    }
+  }
+
   renderAllCards() {
     return fetch(`${this._baseUrl}${this._cohort}/cards`, {
       headers: {
         authorization: this._token
       }
     })
+    .then(res => this._checkResponse(res))
   }
 
   setDataUser() {
     return fetch(`${this._baseUrl}${this._cohort}/users/me`, {
       headers: {
-
         authorization: this._token
       }
     })
+    .then(res => this._checkResponse(res))
   }
 
   reqDelCard(idCard) {
@@ -92,6 +101,7 @@ export default class Api {
         avatar: link
       })
     })
+    .then(res => this._checkResponse(res))
   }
 
 }
